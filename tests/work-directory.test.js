@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { portfolio } from '../content.js';
-import { normalizeCategory, filterProjects, categoryUrl } from '../work-directory.js';
+import { normalizeCategory, filterProjects, categoryUrl, initWorkDirectory } from '../work-directory.js';
 
 const { projects, workCategories: categories } = portfolio;
 
@@ -39,4 +39,43 @@ test('category URLs preserve direct navigation and cannot inject extra query par
   }
   const crafted = new URL(categoryUrl('coffee&redirect=https://example.com'), 'https://portfolio.example');
   assert.equal(crafted.searchParams.has('redirect'), false);
+});
+
+test('directory traps Tab in both directions and restores focus and previous scroll state', () => {
+  const previousDocument = globalThis.document;
+  const fakeDocument = { body: { style: { overflow: 'clip' } }, activeElement: null };
+  function control() {
+    const handlers = {};
+    return { handlers, addEventListener(type, handler) { handlers[type] = handler; }, focus() { fakeDocument.activeElement = this; }, getClientRects() { return [{}]; } };
+  }
+  const opener = control(), close = control(), lastLink = control();
+  const dialog = {
+    ...control(), open: false,
+    querySelector() { return close; },
+    querySelectorAll() { return [close, lastLink]; },
+    showModal() { this.open = true; },
+    close() { this.open = false; this.handlers.close(); },
+  };
+  try {
+    globalThis.document = fakeDocument;
+    initWorkDirectory(dialog, { querySelectorAll() { return [opener]; } });
+    opener.handlers.click();
+    assert.equal(dialog.open, true);
+    assert.equal(fakeDocument.body.style.overflow, 'hidden');
+    assert.equal(fakeDocument.activeElement, close);
+    let prevented = 0;
+    lastLink.focus();
+    dialog.handlers.keydown({ key: 'Tab', shiftKey: false, preventDefault() { prevented++; } });
+    assert.equal(fakeDocument.activeElement, close);
+    dialog.handlers.keydown({ key: 'Tab', shiftKey: true, preventDefault() { prevented++; } });
+    assert.equal(fakeDocument.activeElement, lastLink);
+    assert.equal(prevented, 2);
+    close.handlers.click();
+    assert.equal(dialog.open, false);
+    assert.equal(fakeDocument.body.style.overflow, 'clip');
+    assert.equal(fakeDocument.activeElement, opener);
+  } finally {
+    if (previousDocument === undefined) delete globalThis.document;
+    else globalThis.document = previousDocument;
+  }
 });

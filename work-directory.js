@@ -15,7 +15,7 @@ export function categoryUrl(id) {
   return id === 'all' ? '/works' : `/works?category=${encodeURIComponent(id)}`;
 }
 
-/** Native modal provides Escape, background inertness and keyboard containment. */
+/** Native modal provides Escape and background inertness; Tab stays in its controls. */
 export function initWorkDirectory(dialog, root = document) {
   if (!dialog) return;
   let trigger;
@@ -35,6 +35,18 @@ export function initWorkDirectory(dialog, root = document) {
   dialog.addEventListener('close', () => {
     document.body.style.overflow = previousOverflow;
     trigger?.focus({ preventScroll: true });
+  });
+  dialog.addEventListener('keydown', event => {
+    if (event.key !== 'Tab') return;
+    const controls = [...dialog.querySelectorAll('button:not(:disabled), a[href]')].filter(element => element.getClientRects().length);
+    const first = controls[0], last = controls.at(-1);
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
   });
   dialog.addEventListener('click', event => {
     if (event.target !== dialog) return;
