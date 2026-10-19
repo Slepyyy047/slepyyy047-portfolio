@@ -32,7 +32,7 @@
 .directory-number { align-self: start; padding-top: 7px; color: #91b2c28c; font-size: 11px; font-weight: 700; letter-spacing: .08em; }
 .directory-label { display: block; color: var(--text); font-size: clamp(21px, 2.6vw, 30px); font-weight: 750; line-height: 1.18; letter-spacing: -.045em; transition: color .25s, transform .35s var(--ease); }
 .directory-description { display: block; margin-top: 6px; color: var(--muted); font-size: 11px; line-height: 1.5; }
-.directory-count { justify-self: end; align-self: start; margin-top: 8px; color: #9db4bd9c; font-size: 9px; font-weight: 700; letter-spacing: .09em; white-space: nowrap; }
+.directory-count { justify-self: end; align-self: start; margin-top: 8px; color: var(--muted); font-size: 9px; font-weight: 700; letter-spacing: .09em; white-space: nowrap; }
 .directory-arrow { position: absolute; right: 4px; bottom: 23px; color: var(--accent); font-size: 18px; opacity: 0; transform: translate(-7px, 7px); transition: opacity .3s, transform .35s var(--ease); }
 .directory-option:hover .directory-arrow, .directory-option:focus-visible .directory-arrow { opacity: 1; transform: none; }
 .directory-option:hover .directory-label { color: #d1e0e5; transform: translateX(4px); }
