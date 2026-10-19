@@ -12,6 +12,7 @@
   <meta property="og:locale" content="uk_UA">
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/town.css">
   <script type="module" src="/app.js"></script>
 </head>
 <body>
@@ -43,17 +44,26 @@
         <div class="about-side reveal"><span class="section-index">ПРО МЕНЕ</span><figure class="portrait-detail"><div class="portrait-orbit"><span class="orbit-line orbit-one" aria-hidden="true"></span><span class="orbit-line orbit-two" aria-hidden="true"></span><span class="orbit-spark" aria-hidden="true">✦</span><div class="portrait-frame"><img id="portrait-image" src="/assets/portrait.webp" alt="Ілюстрований портрет Slepyyy047" width="440" height="440" loading="lazy"></div></div><figcaption class="identity-name">Slepyyy047</figcaption></figure></div>
         <div class="about-copy reveal"><h2 id="about-title">Я — Данило.<br><em>Створюю ваш сайт.</em></h2><p id="about-description"></p><p class="about-note" id="about-note"></p><ul class="craft-list" aria-label="Що я роблю"><li>Дизайн</li><li>Розробка</li><li>Анімації</li></ul><a class="text-link" href="https://t.me/slp_studying" target="_blank" rel="noopener noreferrer">Познайомимось <span aria-hidden="true">↗</span></a></div>
       </section>
-      <section class="selected-works wrap section" id="selected-works" aria-labelledby="selected-title">
-        <div class="section-heading reveal"><h2 id="selected-title">Мої<br><em>проєкти.</em></h2><div class="works-heading-note"><span class="section-index">(01 — 02)</span><p>Відкрийте прев’ю.<br>Зазирніть у деталі.</p><span id="selection-note" hidden></span></div></div>
-        <div id="selected-projects" class="project-grid"></div>
-        <div class="all-works-link reveal"><a class="text-link" href="/works">Усі роботи та деталі <span aria-hidden="true">↗</span></a></div>
+      <section class="work-district wrap" id="selected-works" aria-labelledby="selected-title">
+        <div class="district-heading reveal">
+          <span class="district-kicker">ПОРТФОЛІО / РІЗНІ БІЗНЕСИ. СВІЙ ХАРАКТЕР.</span>
+          <h2 id="selected-title">Маленький квартал.<br><em>Великі ідеї.</em></h2>
+          <p class="district-intro">Кав’ярні, барбершопи, магазини. Сайти для місць, до яких хочеться повертатися.</p>
+        </div>
+        <div class="district-scene reveal" aria-hidden="true"><img src="/assets/business-quarter.svg" alt="" width="1000" height="420" loading="lazy"></div>
+        <div class="district-bottom reveal">
+          <p class="district-note">Оберіть напрям і познайомтеся з роботами ближче.</p>
+          <button class="district-open" type="button" data-open-directory aria-haspopup="dialog" aria-controls="work-directory">Перейти до моїх робіт <span aria-hidden="true">↗</span></button>
+        </div>
       </section>
 
     </div>
     <section id="works-page" class="works-page wrap" aria-labelledby="works-title" hidden>
       <a class="back-link" href="/">← На головну</a>
       <div class="works-intro entrance"><h1 id="works-title">Вибрані <em>роботи.</em></h1><p>Сайти, які вже можна відкрити й спробувати.</p></div>
-      <div class="gallery-heading reveal"><span>Дизайн та розробка</span><span id="gallery-note"></span></div><div id="all-projects" class="project-grid"></div>
+      <button class="text-link directory-toggle" type="button" data-open-directory aria-haspopup="dialog" aria-controls="work-directory">Обрати напрям <span aria-hidden="true">↗</span></button>
+      <nav class="work-filters" id="work-filters" aria-label="Категорії робіт"></nav>
+      <div class="gallery-heading reveal"><span id="gallery-category">Усі напрями</span><span id="gallery-note"></span></div><div id="all-projects" class="project-grid"></div>
     </section>
     <section class="contact" id="contact" aria-labelledby="contact-title">
       <div class="contact-inner wrap">
@@ -63,6 +73,18 @@
     </section>
   </main>
   <footer class="footer wrap reveal"><a class="footer-name identity-name" href="/">Slepyyy047</a><a id="photo-credit" href="#" hidden></a><a href="#main">Нагору <span aria-hidden="true">↑</span></a></footer>
+  <dialog id="work-directory" class="work-directory" aria-labelledby="directory-title" aria-describedby="directory-description">
+    <div class="directory-shell">
+      <header class="directory-header">
+        <span class="directory-eyebrow">МОЇ РОБОТИ / ЗА НАПРЯМАМИ</span>
+        <h2 id="directory-title">З чого почнемо?</h2>
+        <p id="directory-description">Кожен бізнес має свою атмосферу. Оберіть розділ, який вам ближчий.</p>
+        <button class="directory-close" type="button" aria-label="Закрити меню робіт">×</button>
+      </header>
+      <nav aria-label="Напрями портфоліо"><ul class="directory-list" id="directory-list"></ul></nav>
+      <footer class="directory-footnote"><span>Різні напрями. Увага до кожного.</span><a class="text-link" href="/works">Переглянути всі роботи <span aria-hidden="true">↗</span></a></footer>
+    </div>
+  </dialog>
   <dialog id="project-dialog" aria-labelledby="dialog-title"><button class="dialog-close" aria-label="Закрити проєкт">✕</button><div id="dialog-content"></div></dialog>
   <p class="toast" id="toast" role="status" aria-live="polite"></p>
   <noscript><p class="noscript">Напишіть мені в <a href="https://t.me/slp_studying">Telegram</a>. Перегляньте <a href="https://lampera.base44.app">LAMPERA</a> та <a href="https://barberlab-busk.vercel.app">BARBERLAB</a>. Увімкніть JavaScript для інтерактивного портфоліо.</p></noscript>

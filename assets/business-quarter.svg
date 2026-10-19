@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 420" fill="none" role="img" aria-label="Архітектурна ілюстрація кварталу з кав’ярнею, барбершопом і крамницею">
+  <defs>
+    <linearGradient id="glass" x1="0" y1="0" x2="0.9" y2="1">
+      <stop stop-color="#AFC9D2" stop-opacity=".14"/>
+      <stop offset="1" stop-color="#587687" stop-opacity=".035"/>
+    </linearGradient>
+    <linearGradient id="light" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#D5C5A4" stop-opacity=".24"/>
+      <stop offset="1" stop-color="#D5C5A4" stop-opacity=".025"/>
+    </linearGradient>
+    <filter id="glow" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="9"/>
+    </filter>
+  </defs>
+  <!-- Distant roofline and quiet hillside -->
+  <path d="M18 290c75-48 113-48 180-8 47-59 96-68 151-10 62-53 124-56 193-2 77-54 127-52 195-3 61-31 121-21 245 30" stroke="#7894A2" stroke-opacity=".25" stroke-width="1.4"/>
+  <path d="M37 320c83-31 137-16 191 8 75-34 127-37 197-2 63-23 133-16 200 4 88-38 175-32 320 9" stroke="#7894A2" stroke-opacity=".14" stroke-width="1.2"/>
+  <!-- Coffee house -->
+  <path d="M74 225h250v157H74z" fill="url(#glass)" stroke="#9EB7C1" stroke-opacity=".62" stroke-width="1.5"/>
+  <path d="M59 226 88 178h219l31 48" stroke="#9EB7C1" stroke-opacity=".72" stroke-width="1.7"/>
+  <path d="M88 178v-22h218v22M74 248h250" stroke="#9EB7C1" stroke-opacity=".36" stroke-width="1.3"/>
+  <path d="M96 258h91v124H96zM205 258h101v124H205z" fill="url(#light)" stroke="#B6C2B8" stroke-opacity=".43" stroke-width="1.2"/>
+  <path d="M142 258v124m63-82h101" stroke="#AABEC4" stroke-opacity=".3" stroke-width="1"/>
+  <circle cx="147" cy="304" r="8" fill="#D5C5A4" fill-opacity=".33" filter="url(#glow)"/>
+  <circle cx="253" cy="304" r="7" fill="#D5C5A4" fill-opacity=".28" filter="url(#glow)"/>
+  <path d="M118 342c10-24 22-24 34 0m76 0c10-22 22-22 34 0" stroke="#D5C5A4" stroke-opacity=".47" stroke-width="1.2"/>
+  <!-- Barber studio -->
+  <path d="M353 199h291v183H353z" fill="url(#glass)" stroke="#9EB7C1" stroke-opacity=".66" stroke-width="1.5"/>
+  <path d="m336 200 31-52h261l32 52M367 148v-23h261v23" stroke="#9EB7C1" stroke-opacity=".72" stroke-width="1.7"/>
+  <path d="M374 223h249v159H374z" stroke="#AABEC4" stroke-opacity=".32" stroke-width="1.1"/>
+  <path d="M392 241h82v141h-82zM492 241h111v141H492z" fill="url(#light)" stroke="#B6C2B8" stroke-opacity=".42" stroke-width="1.1"/>
+  <circle cx="433" cy="285" r="7" fill="#D5C5A4" fill-opacity=".3" filter="url(#glow)"/>
+  <circle cx="546" cy="285" r="7" fill="#D5C5A4" fill-opacity=".29" filter="url(#glow)"/>
+  <path d="M418 309c8-16 22-16 30 0m80 23c9-18 25-18 35 0" stroke="#D5C5A4" stroke-opacity=".4" stroke-width="1.2"/>
+  <path d="M508 355h79m-79 8h60" stroke="#9EB7C1" stroke-opacity=".45" stroke-width="1"/>
+  <!-- Boutique / small business -->
+  <path d="M677 237h245v145H677z" fill="url(#glass)" stroke="#9EB7C1" stroke-opacity=".62" stroke-width="1.5"/>
+  <path d="m660 238 28-45h213l29 45M688 193v-21h213v21" stroke="#9EB7C1" stroke-opacity=".72" stroke-width="1.7"/>
+  <path d="M696 258h207v124H696z" stroke="#AABEC4" stroke-opacity=".32" stroke-width="1.1"/>
+  <path d="M714 274h71v108h-71zM801 274h83v108h-83z" fill="url(#light)" stroke="#B6C2B8" stroke-opacity=".4" stroke-width="1.1"/>
+  <circle cx="749" cy="301" r="6" fill="#D5C5A4" fill-opacity=".27" filter="url(#glow)"/>
+  <circle cx="842" cy="301" r="6" fill="#D5C5A4" fill-opacity=".3" filter="url(#glow)"/>
+  <!-- Trees, planters and ground -->
+  <path d="M39 382h927" stroke="#A6BDC5" stroke-opacity=".48" stroke-width="1.5"/>
+  <path d="M18 395c126-17 242-17 369 0 144 18 293 16 595-3" stroke="#809BA7" stroke-opacity=".18" stroke-width="1.2"/>
+  <g stroke="#8DA9B4" stroke-opacity=".55" stroke-width="1.4">
+    <path d="M47 382h46l-5 20H52zM632 382h34l-4 18h-27zM931 382h43l-6 20h-32z"/>
+    <path d="M70 382v-50m0 9-16-16m16 8 17-20m-17 6-11-15m11 24 13-13"/>
+    <path d="M649 382v-36m0 10-12-13m12 5 13-17m-13 8-8-11"/>
+    <path d="M952 382v-49m0 9-15-17m15 7 15-19m-15 6-10-14m10 22 12-12"/>
+  </g>
+  <g fill="#9FB7BE" fill-opacity=".22">
+    <ellipse cx="70" cy="326" rx="15" ry="25"/><ellipse cx="87" cy="329" rx="12" ry="20"/>
+    <ellipse cx="649" cy="345" rx="13" ry="22"/><ellipse cx="662" cy="348" rx="11" ry="17"/>
+    <ellipse cx="952" cy="325" rx="15" ry="25"/><ellipse cx="968" cy="329" rx="12" ry="20"/>
+  </g>
+  <!-- Fine paving lines -->
+  <path d="M155 382v22m87-22v22m86-22v22m87-22v22m87-22v22m87-22v22m87-22v22m87-22v22m87-22v22" stroke="#8DA9B4" stroke-opacity=".14" stroke-width="1"/>
+</svg>

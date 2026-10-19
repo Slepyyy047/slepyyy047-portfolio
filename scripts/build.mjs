@@ -7,11 +7,11 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const output = join(root, 'dist');
 const sourceFiles = [
   'index.html', 'works/index.html', 'styles.css', 'app.js', 'content.js', 'wordmark.js', 'nature.js',
-  'wave.js', 'motion.js', 'letters.js', 'utils.js',
+  'wave.js', 'motion.js', 'letters.js', 'utils.js', 'work-directory.js', 'town.css',
 ];
 const assets = [
   'assets/portrait.webp', 'assets/lampera.webp', 'assets/barberlab.webp',
-  'assets/alpine-landscape.webp', 'assets/alpine-landscape-small.webp', 'assets/favicon.svg',
+  'assets/alpine-landscape.webp', 'assets/alpine-landscape-small.webp', 'assets/favicon.svg', 'assets/business-quarter.svg',
 ];
 
 const digest = createHash('sha256');
@@ -27,7 +27,7 @@ for (const file of [...sourceFiles, ...assets]) {
   let contents = await readFile(join(root, file));
   if (file.endsWith('.html')) {
     contents = Buffer.from(contents.toString('utf8')
-      .replace(/(href="\/styles\.css|src="\/app\.js)(")/g, `$1?v=${version}$2`)
+      .replace(/(href="\/(?:styles|town)\.css|src="\/app\.js)(")/g, `$1?v=${version}$2`)
       .replace(/(href="\/assets\/[^"?]+|src="\/assets\/[^"?]+)(")/g, `$1?v=${version}$2`)
       .replace(/(\/assets\/[^\s",]+\.(?:webp|svg))(?=\s|,)/g, `$1?v=${version}`));
   } else if (file.endsWith('.js')) {

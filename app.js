@@ -4,6 +4,7 @@ import { initNatureScene } from './nature.js';
 import { initScrollWave } from './wave.js';
 import { initRevealMotion } from './motion.js';
 import { initLetterInteractions } from './letters.js';
+import { normalizeCategory, filterProjects, categoryUrl, initWorkDirectory } from './work-directory.js';
 import { safeUrl, validEmail, escapeHtml as esc, safeImage } from './utils.js';
 
 const $ = selector => document.querySelector(selector);
@@ -75,18 +76,30 @@ function handleMissingImages(root) {
   }, { once: true }));
 }
 const projects = portfolio.projects || [];
+const categories = portfolio.workCategories || [];
+const selectedCategory = normalizeCategory(new URLSearchParams(location.search).get('category'), categories);
+const selectedCategoryData = categories.find(category => category.id === selectedCategory);
 function renderProjects(root, entries) {
   root.innerHTML = entries.length ? entries.map(project => {
     const index = projects.indexOf(project);
     return `<article class="project-card reveal is-sealed" data-card="${index}"><button class="project-open" data-project="${index}" aria-label="Показати прев’ю: ${esc(project.title)}">${preview(project, index, '', true)}<div class="project-meta"><div><h3>${esc(project.title)}</h3><p class="project-description">${esc(project.shortDescription || project.description)}</p></div><span class="project-arrow" aria-hidden="true">↗</span></div></button><div class="project-footer"><span>${esc(project.category || '')}</span><div class="project-actions"><button class="text-link project-details" data-project="${index}" hidden>Деталі <span aria-hidden="true">↗</span></button>${externalLink(project.liveUrl, 'Відкрити сайт')}</div></div></article>`;
-  }).join('') : '<p class="empty-gallery">Добірка робіт готується. Незабаром тут з’являться проєкти та деталі їх створення.</p>';
+  }).join('') : '<div class="gallery-empty" role="status"><span class="gallery-empty-icon" aria-hidden="true">↗</span><h2>Нові роботи — незабаром.</h2><p>Цей розділ ще поповнюється. А поки перегляньте інші напрями.</p><a class="text-link" href="/works">Усі роботи <span aria-hidden="true">↗</span></a></div>';
   handleMissingImages(root);
 }
-renderProjects($('#selected-projects'), projects.slice(0, 4));
-renderProjects($('#all-projects'), projects);
-const published = projects.filter(project => !project.placeholder).length;
-$('#selection-note').textContent = published ? 'Вибране з портфоліо' : 'Добірка готується';
-$('#gallery-note').textContent = published ? `Опубліковано: ${published}` : 'Матеріали готуються';
+const filteredProjects = filterProjects(projects, categories, selectedCategory);
+renderProjects($('#all-projects'), filteredProjects);
+$('#gallery-note').textContent = `Проєктів: ${filteredProjects.length}`;
+$('#gallery-category').textContent = selectedCategoryData?.title || 'Усі напрями';
+if (worksPage && selectedCategoryData) {
+  document.title = `${selectedCategoryData.title} — роботи ${portfolio.name}`;
+  document.querySelector('meta[property="og:title"]').content = document.title;
+}
+$('#work-filters').innerHTML = [{ id: 'all', title: 'Усі роботи' }, ...categories].map(category => `<a class="work-filter" href="${esc(categoryUrl(category.id))}"${category.id === selectedCategory ? ' aria-current="true"' : ''}>${esc(category.title)}</a>`).join('');
+$('#directory-list').innerHTML = categories.map((category, index) => {
+  const count = filterProjects(projects, categories, category.id).length;
+  return `<li><a class="directory-option" href="${esc(categoryUrl(category.id))}" aria-label="${esc(category.title)} — ${count ? `проєктів: ${count}` : 'незабаром'}"><span class="directory-number" aria-hidden="true">0${index + 1}</span><span><span class="directory-label">${esc(category.title)}</span><span class="directory-description">${esc(category.description)}</span></span><span class="directory-count">${count ? String(count).padStart(2, '0') : 'НЕЗАБАРОМ'}</span><span class="directory-arrow" aria-hidden="true">↗</span></a></li>`;
+}).join('');
+initWorkDirectory($('#work-directory'));
 
 const email = validEmail(portfolio.contacts.email);
 let contactHtml = email ? `<a class="text-link" href="mailto:${encodeURIComponent(email)}">${esc(email)} <span aria-hidden="true">↗</span></a><button class="copy-button" id="copy-email">Скопіювати email <span aria-hidden="true">⧉</span></button>` : '';
@@ -146,7 +159,6 @@ function openProject(event) {
   dialog.scrollTop = 0;
   $('.dialog-close').focus();
 }
-$('#selected-projects').addEventListener('click', openProject);
 $('#all-projects').addEventListener('click', openProject);
 initRevealMotion();
 initLetterInteractions();

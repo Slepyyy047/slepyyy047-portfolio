@@ -25,7 +25,7 @@ async function revealPreview(container, index = 0) {
   assert.equal(await card.evaluate(e => e.classList.contains('is-sealed')), true);
   await trigger.focus();
   await page.keyboard.press('Enter');
-  assert.equal(await page.locator('dialog').evaluate(d => d.open), false);
+  assert.equal(await page.locator('#project-dialog').evaluate(d => d.open), false);
   assert.equal(await card.evaluate(e => e.classList.contains('is-revealed')), true);
   assert.equal(await card.locator('.project-details').isVisible(), true);
   await pause(950);
@@ -35,7 +35,7 @@ async function revealPreview(container, index = 0) {
 async function dialogCheck(container) {
   const trigger = await revealPreview(container);
   await trigger.click();
-  assert.equal(await page.locator('dialog').evaluate(d => d.open), true);
+  assert.equal(await page.locator('#project-dialog').evaluate(d => d.open), true);
   assert.equal(await page.locator('.dialog-close').evaluate(e => e === document.activeElement), true);
   await page.keyboard.press('Tab');
   assert.equal(await page.evaluate(() => !!document.activeElement.closest('dialog')), true);
@@ -43,7 +43,7 @@ async function dialogCheck(container) {
   assert.equal(await page.evaluate(() => !!document.activeElement.closest('dialog')), true);
   await page.keyboard.press('Escape');
   await pause(300);
-  assert.equal(await page.locator('dialog').evaluate(d => d.open), false);
+  assert.equal(await page.locator('#project-dialog').evaluate(d => d.open), false);
   assert.equal(await trigger.evaluate(e => e === document.activeElement), true);
 }
 try {
@@ -56,7 +56,7 @@ try {
   assert.equal(await page.locator('#contact-methods a').getAttribute('href'), 'https://t.me/slp_studying');
   assert.equal(await page.locator('#channel-link a').getAttribute('href'), 'https://t.me/+GW8PM4mr1_4zYThh');
   for (const project of portfolio.projects) {
-    assert.equal(await page.locator(`#selected-projects a[href="${new URL(project.liveUrl).href}"]`).count(), 1);
+    assert.equal(await page.locator(`#all-projects a[href="${new URL(project.liveUrl).href}"]`).count(), 1);
   }
   assert.equal(await page.evaluate(() => document.body.innerText.replace(document.querySelector('#about').innerText, '').includes('Данило')), false);
   assert.ok(await page.locator('.wordmark-static').evaluate(e => parseFloat(getComputedStyle(e).fontSize)) >= 40);
@@ -127,14 +127,16 @@ try {
   assert.equal(await page.locator('.wordmark').getAttribute('data-slicing'), 'ready');
   checks.push({ wordmark: 'Real canvas pixels: left/middle/right locality, fixed bounds and exact return', changedPixelsByThird: slices });
 
-  await dialogCheck('#selected-projects');
-  await revealPreview('#selected-projects', 1);
-  await page.locator('#selected-projects [data-card="1"] .project-details').click();
-  await page.locator('.dialog-close').click();
-  await pause(250);
-  assert.equal(await page.locator('dialog').evaluate(d => d.open), false);
-  checks.push('Keyboard spoiler reveals, Details buttons, home project dialogs, Tab containment, Escape, close button and focus restoration');
-  await page.locator('.all-works-link a').click();
+  const directoryButton = page.locator('#selected-works [data-open-directory]');
+  await directoryButton.click();
+  assert.equal(await page.locator('#work-directory').evaluate(d => d.open), true);
+  assert.equal(await page.locator('.directory-option').count(), portfolio.workCategories.length);
+  assert.equal(await page.locator('.directory-close').evaluate(e => e === document.activeElement), true);
+  await page.keyboard.press('Escape');
+  assert.equal(await page.locator('#work-directory').evaluate(d => d.open), false);
+  assert.equal(await directoryButton.evaluate(e => e === document.activeElement), true);
+  await directoryButton.click();
+  await page.locator('#work-directory a[href="/works"]').click();
   await page.waitForURL('**/works');
   assert.equal(await page.locator('#works-page').isVisible(), true);
   assert.equal(await page.locator('#home-page').isVisible(), false);
@@ -143,7 +145,18 @@ try {
   await dialogCheck('#all-projects');
   assert.equal((await page.goto(base + '/works/')).status(), 200);
   assert.equal(await page.locator('#works-page').isVisible(), true);
-  checks.push('All-works button, /works and /works/ direct entry, refresh and gallery dialogs');
+  checks.push('Town directory, Escape and focus restore, /works direct entry and project dialogs');
+  for (const category of portfolio.workCategories) {
+    await page.goto(base + '/works?category=' + category.id);
+    const expected = portfolio.projects.filter(project => project.categoryId === category.id);
+    assert.equal(await page.locator('#all-projects article').count(), expected.length);
+    assert.equal(await page.locator('.work-filter[aria-current="true"]').getAttribute('href'), '/works?category=' + category.id);
+    if (!expected.length) assert.equal(await page.locator('.gallery-empty').isVisible(), true);
+    else assert.equal(await page.locator('#all-projects h3').first().textContent().then(text => text.includes(expected[0].title)), true);
+  }
+  await page.goto(base + '/works?category=unknown');
+  assert.equal(await page.locator('#all-projects article').count(), portfolio.projects.length);
+  checks.push('All category routes, counts, active filter, honest empty states and invalid-category fallback');
   for (const route of ['/', '/works']) {
     await page.goto(base + route);
     for (const width of [320, 390, 560, 768, 1024, 1440]) await noOverflow(width);

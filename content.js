@@ -22,9 +22,16 @@ export const portfolio = {
       description: "Додаю рух, який підкреслює характер проєкту: від живих деталей до плавних переходів між розділами.",
     },
   ],
+  workCategories: [
+    { id: "coffee", title: "Кав’ярні", description: "Кава, атмосфера та гостинність." },
+    { id: "barber", title: "Барбершопи", description: "Майстри, стиль і зручний запис." },
+    { id: "retail", title: "Магазини", description: "Товари, колекції та онлайн-покупки." },
+    { id: "other", title: "Інші бізнеси", description: "Послуги, бренди та нові напрями." },
+  ],
   projects: [
     {
       id: "lampera",
+      categoryId: "retail",
       placeholder: false,
       title: "LAMPERA",
       shortDescription: "Каталог світла для дому.",
@@ -39,6 +46,7 @@ export const portfolio = {
     },
     {
       id: "barberlab",
+      categoryId: "barber",
       placeholder: false,
       title: "BARBERLAB",
       shortDescription: "Барбершоп у Буську. Послуги, майстри, запис.",

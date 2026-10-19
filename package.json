@@ -7,6 +7,6 @@
     "start": "node server.mjs",
     "build": "node scripts/build.mjs",
     "test": "node --test",
-    "check": "node --check app.js && node --check wordmark.js && node --check nature.js && node --check wave.js && node --check motion.js && node --check letters.js && node --check content.js && node --check server.mjs && node --check scripts/build.mjs"
+    "check": "node --check app.js && node --check wordmark.js && node --check nature.js && node --check wave.js && node --check motion.js && node --check letters.js && node --check content.js && node --check server.mjs && node --check scripts/build.mjs && node --check work-directory.js"
   }
 }
