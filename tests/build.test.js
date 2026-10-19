@@ -21,9 +21,9 @@ async function filesUnder(directory) {
 test('production output contains only allowlisted runtime files and used image assets', async () => {
   const files = (await filesUnder(dist)).map(path => relative(dist, path).replaceAll('\\', '/')).sort();
   const expected = [
-    'app.js', 'assets/alpine-landscape-small.webp', 'assets/alpine-landscape.webp',
+    'app.js',
     'assets/barberlab.webp', 'assets/favicon.svg', 'assets/lampera.webp', 'assets/portrait.webp',
-    'content.js', 'index.html', 'letters.js', 'motion.js', 'nature.js', 'styles.css',
+    'content.js', 'index.html', 'letters.js', 'motion.js', 'styles.css',
     'utils.js', 'wave.js', 'wordmark.js', 'works/index.html', 'work-directory.js', 'town.css', 'assets/business-quarter.svg',
   ].sort();
   assert.deepEqual(files, expected);
@@ -38,12 +38,13 @@ test('HTML routes use deterministic cache versions for entry files and image URL
     assert.match(html, /href="\/styles\.css\?v=/);
     assert.match(html, /href="\/town\.css\?v=/);
     assert.match(html, /src="\/app\.js\?v=/);
-    assert.match(html, /srcset="[^"]*\?v=[a-f0-9]{12} 960w, [^"]*\?v=[a-f0-9]{12} 1920w"/);
+    assert.match(html, /src="\/assets\/lampera\.webp\?v=[a-f0-9]{12}"/);
+    assert.match(html, /src="\/assets\/barberlab\.webp\?v=[a-f0-9]{12}"/);
   }
 });
 
 test('module imports resolve to versioned files in the production output', async () => {
-  const names = ['app.js', 'content.js', 'wordmark.js', 'nature.js', 'wave.js', 'motion.js', 'letters.js', 'utils.js', 'work-directory.js'];
+  const names = ['app.js', 'content.js', 'wordmark.js', 'wave.js', 'motion.js', 'letters.js', 'utils.js', 'work-directory.js'];
   const jsFiles = await Promise.all(names.map(async name => [name, await readFile(join(dist, name), 'utf8')]));
   const versionSet = new Set();
   for (const [name, source] of jsFiles) {

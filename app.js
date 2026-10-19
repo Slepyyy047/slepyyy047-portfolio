@@ -1,6 +1,5 @@
 import { portfolio } from './content.js';
 import { initWordmark } from './wordmark.js';
-import { initNatureScene } from './nature.js';
 import { initScrollWave } from './wave.js';
 import { initRevealMotion } from './motion.js';
 import { initLetterInteractions } from './letters.js';
@@ -38,22 +37,10 @@ portraitImage.addEventListener('error', showPortraitFallback, { once: true });
 if (portraitImage.complete && !portraitImage.naturalWidth) showPortraitFallback();
 initWordmark($('.wordmark'));
 if (!worksPage) {
-  initNatureScene($('.nature-scene'));
   initScrollWave($('#intro-title'));
 }
-const naturePhoto = $('.nature-photo');
-function landscapeFallback() { $('.nature-scene').classList.add('image-unavailable'); }
-naturePhoto.addEventListener('error', landscapeFallback, { once: true });
-if (naturePhoto.complete && !naturePhoto.naturalWidth) landscapeFallback();
-const photoSource = safeUrl(portfolio.naturePhoto?.sourceUrl);
-if (photoSource) {
-  const credit = $('#photo-credit');
-  credit.href = photoSource;
-  credit.textContent = `Фото: ${portfolio.naturePhoto.photographer || 'джерело'} ↗`;
-  credit.target = '_blank';
-  credit.rel = 'noopener noreferrer';
-  credit.hidden = false;
-}
+const serviceIcons = ['<rect x="4" y="5" width="24" height="22" rx="3"/><path d="M4 12h24M11 12v15M8 9h.1M12 9h.1"/>', '<rect x="3" y="5" width="19" height="15" rx="2"/><path d="M8 26h8m-4-6v6"/><rect x="20" y="12" width="9" height="16" rx="2"/>', '<path d="m17 3 2.8 9.2L29 15l-9.2 2.8L17 27l-2.8-9.2L5 15l9.2-2.8L17 3ZM6 3v5M3.5 5.5h5"/>'];
+$('#service-grid').innerHTML = (portfolio.services || []).map((service, index) => `<article class="service-card reveal"><div class="service-icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">${serviceIcons[index % serviceIcons.length]}</svg></div><span class="service-number" aria-hidden="true">0${index + 1}</span><h3>${esc(service.title)}</h3><p>${esc(service.description)}</p><ul class="service-tags">${(service.tags || []).map(tag => `<li>${esc(tag)}</li>`).join('')}</ul></article>`).join('');
 
 function externalLink(url, label, className = 'text-link') {
   const valid = safeUrl(url);

@@ -102,7 +102,8 @@ export function initScrollWave(element) {
 
   function readProgress() {
     const rect = section.getBoundingClientRect();
-    return getWaveTarget(-rect.top);
+    const headerHeight = document.querySelector('.header')?.getBoundingClientRect().height || 0;
+    return getWaveTarget(headerHeight - rect.top);
   }
 
   function animate(now) {

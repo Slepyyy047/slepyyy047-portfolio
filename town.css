@@ -1,52 +1,74 @@
-/* Small business district illustration and directory: restrained architecture over the existing blue-slate palette. */
-.work-district{position:relative;isolation:isolate;overflow:hidden;padding-block:clamp(62px,8vw,112px) clamp(54px,7vw,92px);border-top:1px solid #afc9d21b;background:radial-gradient(ellipse at 50% 100%,#253a431c,transparent 68%),linear-gradient(180deg,#152329 0%,#17272e 100%)}
-.work-district::before{content:"";position:absolute;z-index:-1;inset:0;pointer-events:none;background:linear-gradient(90deg,transparent calc(50% - .5px),#b4ccd208 50%,transparent calc(50% + .5px));mask-image:linear-gradient(transparent,#000 18%,#000 80%,transparent)}
-.district-heading{max-width:950px;margin:0 auto;text-align:center}
-.district-kicker,.directory-eyebrow{display:block;color:var(--accent);font-size:10px;letter-spacing:.22em;text-transform:uppercase}
-.district-heading h2{margin:17px 0 12px;font:400 clamp(42px,6.3vw,82px)/1.06 Georgia,"Times New Roman",serif;letter-spacing:-.045em;color:var(--text)}
-.district-heading h2 em{color:var(--accent)}
-.district-intro{max-width:560px;margin:0 auto;color:var(--muted);font-size:14px;line-height:1.8}
-.district-scene{position:relative;display:block;width:min(100%,1120px);margin:22px auto 3px;overflow:visible}
-.district-scene img{display:block;width:100%;height:auto;overflow:visible;filter:drop-shadow(0 24px 45px #08121635);animation:district-arrive .9s var(--ease) both}
-.district-scene::after{content:"";position:absolute;inset:auto 4% 4%;height:1px;background:linear-gradient(90deg,transparent,#a9c2cb35,transparent)}
-.district-bottom{display:flex;justify-content:center;align-items:center;gap:clamp(22px,5vw,68px);margin-top:-2px}
-.district-note{max-width:270px;color:var(--muted);font-size:11px;line-height:1.65}
-.district-open{position:relative;display:inline-flex;align-items:center;justify-content:space-between;gap:40px;min-width:245px;min-height:58px;padding:0 23px;border:1px solid #a8c1cb55;border-radius:999px;background:#233740;color:var(--text);font-size:12px;letter-spacing:.035em;transition:background .35s var(--ease),border-color .35s,transform .35s var(--ease),box-shadow .35s}
-.district-open span{font:20px Georgia,serif;transition:transform .35s var(--ease)}
-.district-open:hover{transform:translateY(-3px);background:#2b4651;border-color:#adc9d29a;box-shadow:0 14px 40px #07111645}
-.district-open:hover span{transform:translate(3px,-3px)}
-.work-directory{position:fixed;z-index:40;inset:0;max-width:none;max-height:none;width:100%;height:100%;margin:0;padding:clamp(28px,6vw,76px);overflow:auto;border:0;background:radial-gradient(ellipse at 50% 0%,#2a424d 0%,#1a2b32 52%,#142329 100%);color:var(--text)}
-.work-directory::backdrop{background:#071014d9;backdrop-filter:blur(10px)}
-.work-directory[open]{animation:directory-enter .45s var(--ease) both}
-.directory-shell{position:relative;width:min(100%,1060px);min-height:100%;margin:0 auto;display:flex;flex-direction:column;justify-content:center}
-.directory-header{position:relative;padding:6px 70px 34px 0;border-bottom:1px solid #b6cdd127}
-.directory-eyebrow{margin-bottom:18px}
-.directory-header h2{font:400 clamp(42px,6vw,74px)/1.05 Georgia,"Times New Roman",serif;letter-spacing:-.045em}
-.directory-header p{max-width:560px;margin-top:15px;color:var(--muted);font-size:13px;line-height:1.75}
-.directory-close{position:absolute;top:0;right:0;display:grid;place-items:center;width:48px;height:48px;border:1px solid #b6cdd144;border-radius:50%;background:#263b44;color:var(--text);font-size:24px;line-height:1;transition:transform .35s var(--ease),background .3s,border-color .3s}
-.directory-close:hover{transform:rotate(90deg);background:#344e58;border-color:#b6cdd188}
-.directory-list{display:grid;grid-template-columns:1fr 1fr;column-gap:clamp(20px,5vw,76px);margin:8px 0 0;padding:0;list-style:none}
-.directory-list li{min-width:0}
-.directory-option{position:relative;display:grid;grid-template-columns:48px 1fr auto;align-items:center;gap:16px;min-height:114px;padding:17px 4px;border-bottom:1px solid #b6cdd121;overflow:hidden}
-.directory-option::after{content:"";position:absolute;left:0;bottom:-1px;width:100%;height:1px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .5s var(--ease)}
-.directory-option:hover::after,.directory-option:focus-visible::after{transform:scaleX(1)}
-.directory-number{align-self:start;padding-top:7px;color:#91b2c28c;font:italic 16px Georgia,serif}
-.directory-label{display:block;font:400 clamp(22px,2.6vw,32px)/1.15 Georgia,"Times New Roman",serif;letter-spacing:-.025em;color:var(--text);transition:transform .4s var(--ease),color .3s}
-.directory-description{display:block;margin-top:7px;color:var(--muted);font-size:11px;line-height:1.5}
-.directory-count{justify-self:end;align-self:start;margin-top:8px;color:#9db4bd9c;font-size:9px;letter-spacing:.08em;white-space:nowrap}
-.directory-arrow{position:absolute;right:3px;bottom:25px;color:var(--accent);font-size:18px;opacity:0;transform:translate(-7px,7px);transition:opacity .35s,transform .4s var(--ease)}
-.directory-option:hover .directory-arrow,.directory-option:focus-visible .directory-arrow{opacity:1;transform:translate(0)}
-.directory-option:hover .directory-label{color:#d0dce0;transform:translateX(4px)}
-.directory-footnote{display:flex;justify-content:space-between;gap:20px;margin-top:24px;color:var(--muted);font-size:10px;letter-spacing:.04em}
-.work-filters{display:flex;flex-wrap:wrap;gap:9px;margin:0 0 34px}
-.directory-toggle{background:transparent;padding:0;margin:0 0 20px}
-.work-filter{display:inline-flex;align-items:center;justify-content:center;min-height:39px;padding:0 16px;border:1px solid #adc5cf35;border-radius:999px;background:transparent;color:var(--muted);font-size:11px;transition:color .25s,border-color .25s,background .25s}
-.work-filter:hover,.work-filter[aria-current="true"]{border-color:#a8c1cb88;background:#29414a;color:var(--text)}
-.gallery-empty{display:grid;place-items:center;min-height:210px;padding:35px;text-align:center;color:var(--muted)}
-.gallery-empty-icon{display:grid;place-items:center;width:46px;height:46px;margin-bottom:13px;border:1px solid #a8c1cb36;border-radius:50%;color:var(--accent);font:20px Georgia,serif}
-.gallery-empty p{max-width:370px;font-size:12px;line-height:1.7}
-@keyframes district-arrive{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-@keyframes directory-enter{from{opacity:0;transform:translateY(12px) scale(.992)}to{opacity:1;transform:none}}
-@media(max-width:700px){.district-bottom{flex-direction:column;gap:15px}.district-note{text-align:center;max-width:360px}.district-scene{margin-block:26px 20px}.directory-list{column-gap:24px}.directory-option{grid-template-columns:35px 1fr auto;gap:10px;min-height:104px}}
-@media(max-width:560px){.work-district{padding-block:58px 54px}.district-heading h2{font-size:clamp(40px,11vw,56px)}.district-intro{font-size:13px}.district-scene{width:calc(100% + 28px);max-width:none;margin-left:-14px;margin-block:32px 24px}.district-bottom{margin-top:0}.district-open{min-width:230px}.work-directory{padding:23px 21px 28px}.directory-shell{justify-content:flex-start;padding-top:clamp(46px,13vh,105px)}.directory-header{padding:4px 52px 26px 0}.directory-close{width:44px;height:44px}.directory-header h2{font-size:43px}.directory-list{grid-template-columns:1fr;margin-top:5px}.directory-option{min-height:87px;grid-template-columns:35px 1fr auto;padding-block:12px}.directory-label{font-size:24px}.directory-description{margin-top:4px;font-size:10px}.directory-count{font-size:8px}.directory-arrow{right:0;bottom:15px}.directory-footnote{flex-direction:column;gap:7px;margin-top:18px;font-size:9px}}
-@media(prefers-reduced-motion:reduce){.district-scene img,.work-directory[open]{animation:none}.district-open,.district-open span,.directory-close,.directory-option::after,.directory-label,.directory-arrow{transition:none}}
+/* Full-screen directory opened by the portfolio work buttons. */
+.work-directory {
+  position: fixed;
+  z-index: 40;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: clamp(26px, 6vw, 72px);
+  overflow: auto;
+  border: 0;
+  border-radius: 0;
+  background: radial-gradient(ellipse at 50% -15%, #2b4650 0, #1a2b32 48%, #142329 100%);
+  color: var(--text);
+}
+.work-directory::backdrop { background: #071014df; backdrop-filter: blur(12px); }
+.work-directory[open] { animation: directory-enter .4s var(--ease) both; }
+.directory-shell { display: flex; width: min(100%, 1060px); min-height: 100%; flex-direction: column; justify-content: center; margin: 0 auto; }
+.directory-header { position: relative; padding: 4px 72px 30px 0; border-bottom: 1px solid #b6cdd127; }
+.directory-eyebrow { display: block; margin-bottom: 16px; color: var(--accent); font-size: 10px; font-weight: 700; letter-spacing: .18em; }
+.directory-header h2 { font-size: clamp(38px, 6vw, 68px); font-weight: 800; line-height: 1.03; letter-spacing: -.075em; }
+.directory-header p { max-width: 570px; margin-top: 14px; color: var(--muted); font-size: 13px; line-height: 1.7; }
+.directory-close { position: absolute; top: 0; right: 0; display: grid; width: 48px; height: 48px; place-items: center; border: 1px solid #b6cdd144; border-radius: 50%; background: #263b44; color: var(--text); font-size: 24px; line-height: 1; transition: transform .3s var(--ease), background .25s, border-color .25s; }
+.directory-close:hover { transform: rotate(90deg); border-color: #b6cdd188; background: #344e58; }
+.directory-list { display: grid; grid-template-columns: 1fr 1fr; column-gap: clamp(20px, 5vw, 76px); margin: 8px 0 0; padding: 0; list-style: none; }
+.directory-list li { min-width: 0; }
+.directory-option { position: relative; display: grid; min-height: 112px; grid-template-columns: 44px 1fr auto; align-items: center; gap: 14px; overflow: hidden; padding: 17px 4px; border-bottom: 1px solid #b6cdd121; }
+.directory-option::after { position: absolute; right: 0; bottom: -1px; left: 0; height: 1px; background: var(--accent); content: ""; transform: scaleX(0); transform-origin: left; transition: transform .45s var(--ease); }
+.directory-option:hover::after, .directory-option:focus-visible::after { transform: scaleX(1); }
+.directory-number { align-self: start; padding-top: 7px; color: #91b2c28c; font-size: 11px; font-weight: 700; letter-spacing: .08em; }
+.directory-label { display: block; color: var(--text); font-size: clamp(21px, 2.6vw, 30px); font-weight: 750; line-height: 1.18; letter-spacing: -.045em; transition: color .25s, transform .35s var(--ease); }
+.directory-description { display: block; margin-top: 6px; color: var(--muted); font-size: 11px; line-height: 1.5; }
+.directory-count { justify-self: end; align-self: start; margin-top: 8px; color: #9db4bd9c; font-size: 9px; font-weight: 700; letter-spacing: .09em; white-space: nowrap; }
+.directory-arrow { position: absolute; right: 4px; bottom: 23px; color: var(--accent); font-size: 18px; opacity: 0; transform: translate(-7px, 7px); transition: opacity .3s, transform .35s var(--ease); }
+.directory-option:hover .directory-arrow, .directory-option:focus-visible .directory-arrow { opacity: 1; transform: none; }
+.directory-option:hover .directory-label { color: #d1e0e5; transform: translateX(4px); }
+.directory-footnote { display: flex; justify-content: space-between; gap: 20px; margin-top: 23px; color: var(--muted); font-size: 10px; }
+.directory-footnote .text-link { min-height: 40px; color: var(--text); font-size: 11px; }
+.directory-footnote .text-link:hover { color: var(--accent); }
+.work-filters { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 28px; }
+.directory-toggle { margin-bottom: 16px; padding: 0 16px; border: 1px solid #aec8d226; border-radius: 999px; background: transparent; }
+.work-filter { display: inline-flex; min-height: 39px; align-items: center; justify-content: center; padding: 0 14px; border: 1px solid #adc5cf35; border-radius: 999px; background: transparent; color: var(--muted); font-size: 11px; transition: color .2s, border-color .2s, background .2s; }
+.work-filter:hover, .work-filter[aria-current="true"] { border-color: #a8c1cb88; background: #29414a; color: var(--text); }
+.gallery-empty { display: grid; min-height: 210px; grid-column: 1 / -1; place-content: center; padding: 32px; border: 1px solid #aec8d222; border-radius: 16px; background: #1b2a31; color: var(--muted); text-align: center; }
+.gallery-empty-icon { display: grid; width: 44px; height: 44px; place-items: center; justify-self: center; margin-bottom: 13px; border: 1px solid #a8c1cb45; border-radius: 50%; color: var(--accent); font-size: 19px; }
+.gallery-empty h2 { color: var(--text); font-size: 22px; font-weight: 750; letter-spacing: -.04em; }
+.gallery-empty p { max-width: 380px; margin: 8px auto 0; font-size: 12px; line-height: 1.65; }
+@keyframes directory-enter { from { opacity: 0; transform: translateY(10px) scale(.995); } to { opacity: 1; transform: none; } }
+@media (max-width: 700px) {
+  .directory-shell { justify-content: flex-start; padding-top: clamp(48px, 12vh, 95px); }
+  .directory-list { column-gap: 22px; }
+  .directory-option { min-height: 100px; grid-template-columns: 34px 1fr auto; gap: 10px; }
+}
+@media (max-width: 560px) {
+  .work-directory { padding: 22px 20px 28px; }
+  .directory-header { padding: 4px 52px 23px 0; }
+  .directory-header h2 { font-size: 40px; }
+  .directory-header p { font-size: 12px; }
+  .directory-close { width: 44px; height: 44px; }
+  .directory-list { grid-template-columns: 1fr; margin-top: 4px; }
+  .directory-option { min-height: 83px; grid-template-columns: 31px minmax(0, 1fr) auto; padding-block: 11px; }
+  .directory-label { font-size: 22px; }
+  .directory-description { margin-top: 4px; font-size: 10px; }
+  .directory-count { max-width: 68px; font-size: 8px; }
+  .directory-arrow { right: 0; bottom: 13px; }
+  .directory-footnote { flex-direction: column; gap: 4px; margin-top: 14px; font-size: 9px; }
+  .directory-footnote .text-link { justify-content: flex-start; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .work-directory[open] { animation: none; }
+  .directory-option::after, .directory-label, .directory-arrow, .directory-close { transition: none; }
+}
