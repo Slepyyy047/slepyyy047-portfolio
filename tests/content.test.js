@@ -34,7 +34,7 @@ test('provided projects use their live links and supplied screenshot assets', as
 });
 test('provided contact and channel links are valid and project identities stay unique', () => {
   assert.equal(portfolio.contacts.email, null);
-  assert.equal(portfolio.contacts.telegram, 'https://t.me/slp_studying');
+  assert.equal(portfolio.contacts.telegram, 'https://t.me/foxyredCEO');
   assert.ok(safeUrl(portfolio.contacts.telegram));
   assert.equal(portfolio.channel.name, 'Мій Telegram-канал');
   assert.equal(portfolio.channel.url, 'https://t.me/+GW8PM4mr1_4zYThh');
