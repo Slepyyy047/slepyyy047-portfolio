@@ -71,8 +71,8 @@ export const portfolio = {
   },
   contacts: {
     email: null,
-    telegram: "https://t.me/slp_studying",
-    telegramLabel: "@slp_studying",
+    telegram: "https://t.me/foxyredCEO",
+    telegramLabel: "@foxyredCEO",
     links: [],
   },
 };
