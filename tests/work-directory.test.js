@@ -7,20 +7,23 @@ const { projects, workCategories: categories } = portfolio;
 
 test('published businesses appear only in the right category', () => {
   assert.deepEqual(filterProjects(projects, categories, 'retail').map(p => p.id), ['lampera']);
-  assert.deepEqual(filterProjects(projects, categories, 'barber').map(p => p.id), ['barberlab']);
-  assert.deepEqual(filterProjects(projects, categories, 'coffee'), []);
+  assert.deepEqual(filterProjects(projects, categories, 'barber').map(p => p.id), ['mono-barber', 'barberlab']);
+  assert.deepEqual(filterProjects(projects, categories, 'coffee').map(p => p.id), ['velune']);
+  assert.deepEqual(filterProjects(projects, categories, 'beauty').map(p => p.id), ['luxe']);
+  assert.deepEqual(filterProjects(projects, categories, 'pastry').map(p => p.id), ['krykhta']);
   assert.deepEqual(filterProjects(projects, categories, 'other'), []);
   assert.equal(new Set(categories.map(c => c.id)).size, categories.length);
   for (const project of projects) assert.notEqual(normalizeCategory(project.categoryId, categories), 'all');
 });
 
 test('missing or invalid category links show all works without mutating portfolio data', () => {
+  const originalCount = projects.length;
   for (const value of [null, '', 'all', 'unknown', '<script>']) {
     const result = filterProjects(projects, categories, value);
     assert.deepEqual(result, projects);
     assert.notEqual(result, projects);
     result.pop();
-    assert.equal(projects.length, 2);
+    assert.equal(projects.length, originalCount);
   }
 });
 

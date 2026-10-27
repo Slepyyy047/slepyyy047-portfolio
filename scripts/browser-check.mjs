@@ -29,7 +29,14 @@ try{
   assert.equal((await page.goto(base)).status(),200);
   await page.waitForFunction(()=>document.querySelector('.wordmark')?.dataset.slicing==='ready');
   assert.equal(await page.locator('#service-grid article').count(),portfolio.services.length);
-  assert.equal(await page.locator('.hero-preview').count(),portfolio.projects.length);
+  assert.equal(await page.locator('button.hero-preview').count(),portfolio.projects.length);
+  assert.equal(await page.locator('.preview-group[aria-hidden="true"] button').count(),0);
+  const pause=page.locator('.preview-toggle');
+  await pause.click();
+  assert.equal(await pause.getAttribute('aria-pressed'),'true');
+  assert.equal(await page.locator('.preview-track').evaluate(e=>getComputedStyle(e).animationPlayState),'paused');
+  await pause.click();
+  assert.equal(await pause.getAttribute('aria-pressed'),'false');
   assert.equal(await page.locator('#contact-methods a').getAttribute('href'),portfolio.contacts.telegram);
   assert.equal(await page.locator('#channel-link a').getAttribute('href'),portfolio.channel.url);
   assert.equal(await page.locator('#intro-title').getAttribute('aria-label'),portfolio.headline.replaceAll('\n',' '));
@@ -44,7 +51,7 @@ try{
   assert.ok((await wave()).every(v=>v===1));
   checks.push('Real services, supplied contacts, accessible hero and single-gesture timed wave');
   await directoryCheck(page.locator('.intro-actions [data-open-directory]'));
-  await directoryCheck(page.locator('.hero-preview-one'));
+  await directoryCheck(page.locator('button.hero-preview').first());
   await directoryCheck(page.locator('.district-open'));
   checks.push('Hero, preview and portfolio category menu; Tab loop, Escape and focus restoration');
   for(const category of portfolio.workCategories){

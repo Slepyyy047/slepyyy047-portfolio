@@ -64,6 +64,47 @@ function handleMissingImages(root) {
 }
 const projects = portfolio.projects || [];
 const categories = portfolio.workCategories || [];
+const previewRail = $('.hero-preview-rail');
+const previewWindow = previewRail.querySelector('.preview-window');
+const previewTrack = previewRail.querySelector('.preview-track');
+const previewToggle = previewRail.querySelector('.preview-toggle');
+function heroPreview(project, index, copy = false) {
+  const src = safeImage(project.cover);
+  const image = src ? '/' + src.replace(/^\.?\//, '') : '';
+  const tag = copy ? 'div' : 'button';
+  return `<${tag} class="hero-preview"${copy ? ` data-preview-copy="${index}"` : ` type="button" data-open-directory aria-haspopup="dialog" aria-controls="work-directory" aria-label="${esc(project.title)} — відкрити меню робіт"`}><span class="preview-caption"><span>${String(index + 1).padStart(2, '0')} / ${esc(project.title)}</span><span aria-hidden="true">↗</span></span>${image ? `<img src="${esc(image)}" alt="${copy ? '' : esc(project.title + ' — вигляд сайту')}" width="1440" height="745" decoding="async"${index > 1 || copy ? ' loading="lazy"' : ''}>` : placeholderPreview(index)}<span class="preview-label">${esc(project.category)}</span></${tag}>`;
+}
+previewTrack.innerHTML = `<div class="preview-group">${projects.map((project, index) => heroPreview(project, index)).join('')}</div><div class="preview-group" aria-hidden="true">${projects.map((project, index) => heroPreview(project, index, true)).join('')}</div>`;
+previewRail.querySelector('.preview-total').textContent = `${projects.length} робіт / Дизайн та розробка`;
+let previewPaused = false;
+previewToggle.addEventListener('click', () => {
+  previewPaused = !previewPaused;
+  previewRail.classList.toggle('is-paused', previewPaused);
+  previewToggle.setAttribute('aria-pressed', String(previewPaused));
+  previewToggle.textContent = previewPaused ? 'Продовжити рух' : 'Зупинити рух';
+});
+previewRail.addEventListener('click', event => {
+  const copy = event.target.closest('[data-preview-copy]');
+  if (copy) previewTrack.querySelectorAll('button.hero-preview')[Number(copy.dataset.previewCopy)]?.click();
+});
+previewRail.addEventListener('focusin', event => {
+  const card = event.target.closest('button.hero-preview');
+  if (!card) return;
+  previewRail.classList.add('is-browsing');
+  previewWindow.scrollLeft = card.offsetLeft - (previewWindow.clientWidth - card.clientWidth) / 2;
+});
+previewRail.addEventListener('focusout', event => {
+  if (event.relatedTarget && previewRail.contains(event.relatedTarget)) return;
+  previewRail.classList.remove('is-browsing');
+  previewWindow.scrollLeft = 0;
+});
+if (!worksPage && 'IntersectionObserver' in window) {
+  const previewObserver = new IntersectionObserver(([entry]) => {
+    previewRail.classList.toggle('is-offscreen', !entry.isIntersecting);
+  });
+  previewObserver.observe(previewRail);
+}
+document.addEventListener('visibilitychange', () => previewRail.classList.toggle('is-background', document.hidden));
 const selectedCategory = normalizeCategory(new URLSearchParams(location.search).get('category'), categories);
 const selectedCategoryData = categories.find(category => category.id === selectedCategory);
 function renderProjects(root, entries) {

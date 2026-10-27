@@ -20,6 +20,10 @@ test('email validation excludes header and query injection', () => {
 test('editable text cannot become HTML', () => assert.equal(escapeHtml('<a href="x">&'), '&lt;a href=&quot;x&quot;&gt;&amp;'));
 test('provided projects use their live links and supplied screenshot assets', async () => {
   assert.deepEqual(portfolio.projects.map(({ id, title, liveUrl, cover }) => ({ id, title, liveUrl, cover })), [
+    { id: 'mono-barber', title: 'MONO BARBER', liveUrl: 'https://mono-barber-xi.vercel.app/#home', cover: 'assets/mono-barber.webp' },
+    { id: 'luxe', title: 'LUXE Hair Studio', liveUrl: 'https://luxe-hair-studio-ruddy.vercel.app/uk', cover: 'assets/luxe.webp' },
+    { id: 'velune', title: 'VELUNE', liveUrl: 'https://velune-theta.vercel.app/', cover: 'assets/velune.webp' },
+    { id: 'krykhta', title: 'КРИХТА', liveUrl: 'https://krykhta-patisserie.vercel.app/', cover: 'assets/krykhta.webp' },
     { id: 'lampera', title: 'LAMPERA', liveUrl: 'https://lampera.base44.app', cover: 'assets/lampera.webp' },
     { id: 'barberlab', title: 'BARBERLAB', liveUrl: 'https://barberlab-busk.vercel.app', cover: 'assets/barberlab.webp' },
   ]);
