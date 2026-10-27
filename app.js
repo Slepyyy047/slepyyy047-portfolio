@@ -1,5 +1,4 @@
 import { portfolio } from './content.js';
-import { initWordmark } from './wordmark.js';
 import { initScrollWave } from './wave.js';
 import { initRevealMotion } from './motion.js';
 import { initLetterInteractions } from './letters.js';
@@ -17,11 +16,7 @@ document.title = `${worksPage ? 'Усі роботи' : 'Створення са
 document.querySelector('meta[property="og:title"]').content = document.title;
 document.querySelectorAll('.identity-name').forEach(element => { element.textContent = portfolio.name; });
 $('#intro-title').innerHTML = portfolio.headline.split('\n').map((line, index) => index ? `<em>${esc(line)}</em>` : esc(line)).join('<br>');
-$('#intro-description').textContent = portfolio.intro;
 $('#about-description').textContent = portfolio.about;
-$('#about-note').textContent = portfolio.aboutNote;
-$('#about-note').hidden = !portfolio.aboutNote;
-$('#contact-description').textContent = portfolio.contactIntro;
 $('#portrait-image').alt = `Ілюстрований портрет ${portfolio.name}`;
 const portraitImage = $('#portrait-image');
 function showPortraitFallback() {
@@ -35,12 +30,9 @@ function showPortraitFallback() {
 }
 portraitImage.addEventListener('error', showPortraitFallback, { once: true });
 if (portraitImage.complete && !portraitImage.naturalWidth) showPortraitFallback();
-initWordmark($('.wordmark'));
 if (!worksPage) {
   initScrollWave($('#intro-title'));
 }
-const serviceIcons = ['<rect x="4" y="5" width="24" height="22" rx="3"/><path d="M4 12h24M11 12v15M8 9h.1M12 9h.1"/>', '<rect x="3" y="5" width="19" height="15" rx="2"/><path d="M8 26h8m-4-6v6"/><rect x="20" y="12" width="9" height="16" rx="2"/>', '<path d="m17 3 2.8 9.2L29 15l-9.2 2.8L17 27l-2.8-9.2L5 15l9.2-2.8L17 3ZM6 3v5M3.5 5.5h5"/>'];
-$('#service-grid').innerHTML = (portfolio.services || []).map((service, index) => `<article class="service-card reveal"><div class="service-icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">${serviceIcons[index % serviceIcons.length]}</svg></div><span class="service-number" aria-hidden="true">0${index + 1}</span><h3>${esc(service.title)}</h3><p>${esc(service.description)}</p><ul class="service-tags">${(service.tags || []).map(tag => `<li>${esc(tag)}</li>`).join('')}</ul></article>`).join('');
 
 function externalLink(url, label, className = 'text-link') {
   const valid = safeUrl(url);
@@ -52,7 +44,7 @@ function placeholderPreview(index, missing = false) {
 function preview(project, index, extra = '', sealed = false) {
   const src = safeImage(project.cover);
   const normalized = src?.match(/^(?:\.\/)?assets\//) ? '/' + src.replace(/^\.\//, '') : src;
-  const veil = sealed ? '<span class="project-veil" aria-hidden="true"><span class="veil-eye"><svg viewBox="0 0 32 32" fill="none"><path d="M3 16s4.5-8 13-8 13 8 13 8-4.5 8-13 8S3 16 3 16Z" stroke="currentColor"/><circle cx="16" cy="16" r="4" stroke="currentColor"/></svg></span><span class="veil-title">За цим — цілий сайт.</span><span class="veil-action">Натисніть, щоб побачити <b>↗</b></span></span>' : '';
+  const veil = sealed ? '<span class="project-veil" aria-hidden="true"><span class="veil-action">Показати прев’ю <b>↗</b></span></span>' : '';
   return `<div class="project-preview preview-${index % 2 + 1} ${extra}">${src ? `<img src="${esc(normalized)}" alt="${esc(project.title)} — вигляд проєкту" width="950" height="500" loading="lazy">` : placeholderPreview(index)}${veil}</div>`;
 }
 function handleMissingImages(root) {
@@ -65,53 +57,20 @@ function handleMissingImages(root) {
 const projects = portfolio.projects || [];
 const categories = portfolio.workCategories || [];
 const previewRail = $('.hero-preview-rail');
-const previewWindow = previewRail.querySelector('.preview-window');
 const previewTrack = previewRail.querySelector('.preview-track');
-const previewToggle = previewRail.querySelector('.preview-toggle');
 function heroPreview(project, index, copy = false) {
   const src = safeImage(project.cover);
   const image = src ? '/' + src.replace(/^\.?\//, '') : '';
-  const tag = copy ? 'div' : 'button';
-  return `<${tag} class="hero-preview"${copy ? ` data-preview-copy="${index}"` : ` type="button" data-open-directory aria-haspopup="dialog" aria-controls="work-directory" aria-label="${esc(project.title)} — відкрити меню робіт"`}><span class="preview-caption"><span>${String(index + 1).padStart(2, '0')} / ${esc(project.title)}</span><span aria-hidden="true">↗</span></span>${image ? `<img src="${esc(image)}" alt="${copy ? '' : esc(project.title + ' — вигляд сайту')}" width="1440" height="745" decoding="async"${index > 1 || copy ? ' loading="lazy"' : ''}>` : placeholderPreview(index)}<span class="preview-label">${esc(project.category)}</span></${tag}>`;
+  return `<figure class="hero-preview">${image ? `<img src="${esc(image)}" alt="${copy ? '' : esc(project.title + ' — вигляд сайту')}" width="1440" height="745" decoding="async" loading="lazy">` : placeholderPreview(index)}<figcaption class="preview-caption"><span>${esc(project.title)}</span><span>${esc(project.category)}</span></figcaption></figure>`;
 }
 previewTrack.innerHTML = `<div class="preview-group">${projects.map((project, index) => heroPreview(project, index)).join('')}</div><div class="preview-group" aria-hidden="true">${projects.map((project, index) => heroPreview(project, index, true)).join('')}</div>`;
-previewRail.querySelector('.preview-total').textContent = `${projects.length} робіт / Дизайн та розробка`;
-let previewPaused = false;
-previewToggle.addEventListener('click', () => {
-  previewPaused = !previewPaused;
-  previewRail.classList.toggle('is-paused', previewPaused);
-  previewToggle.setAttribute('aria-pressed', String(previewPaused));
-  previewToggle.textContent = previewPaused ? 'Продовжити рух' : 'Зупинити рух';
-});
-previewRail.addEventListener('click', event => {
-  const copy = event.target.closest('[data-preview-copy]');
-  if (copy) previewTrack.querySelectorAll('button.hero-preview')[Number(copy.dataset.previewCopy)]?.click();
-});
-previewRail.addEventListener('focusin', event => {
-  const card = event.target.closest('button.hero-preview');
-  if (!card) return;
-  previewRail.classList.add('is-browsing');
-  previewWindow.scrollLeft = card.offsetLeft - (previewWindow.clientWidth - card.clientWidth) / 2;
-});
-previewRail.addEventListener('focusout', event => {
-  if (event.relatedTarget && previewRail.contains(event.relatedTarget)) return;
-  previewRail.classList.remove('is-browsing');
-  previewWindow.scrollLeft = 0;
-});
-if (!worksPage && 'IntersectionObserver' in window) {
-  const previewObserver = new IntersectionObserver(([entry]) => {
-    previewRail.classList.toggle('is-offscreen', !entry.isIntersecting);
-  });
-  previewObserver.observe(previewRail);
-}
-document.addEventListener('visibilitychange', () => previewRail.classList.toggle('is-background', document.hidden));
 const selectedCategory = normalizeCategory(new URLSearchParams(location.search).get('category'), categories);
 const selectedCategoryData = categories.find(category => category.id === selectedCategory);
 function renderProjects(root, entries) {
   root.innerHTML = entries.length ? entries.map(project => {
     const index = projects.indexOf(project);
-    return `<article class="project-card reveal is-sealed" data-card="${index}"><button class="project-open" data-project="${index}" aria-label="Показати прев’ю: ${esc(project.title)}">${preview(project, index, '', true)}<div class="project-meta"><div><h3>${esc(project.title)}</h3><p class="project-description">${esc(project.shortDescription || project.description)}</p></div><span class="project-arrow" aria-hidden="true">↗</span></div></button><div class="project-footer"><span>${esc(project.category || '')}</span><div class="project-actions"><button class="text-link project-details" data-project="${index}" hidden>Деталі <span aria-hidden="true">↗</span></button>${externalLink(project.liveUrl, 'Відкрити сайт')}</div></div></article>`;
-  }).join('') : '<div class="gallery-empty" role="status"><span class="gallery-empty-icon" aria-hidden="true">↗</span><h2>Нові роботи — незабаром.</h2><p>Цей розділ ще поповнюється. А поки перегляньте інші напрями.</p><a class="text-link" href="/works">Усі роботи <span aria-hidden="true">↗</span></a></div>';
+    return `<article class="project-card reveal is-sealed" data-card="${index}"><button class="project-open" data-project="${index}" aria-label="Показати прев’ю: ${esc(project.title)}">${preview(project, index, '', true)}<div class="project-meta"><h3>${esc(project.title)}</h3><span class="project-arrow" aria-hidden="true">↗</span></div></button><div class="project-footer"><span>${esc(project.category || '')}</span><div class="project-actions"><button class="text-link project-details" data-project="${index}" hidden>Деталі <span aria-hidden="true">↗</span></button>${externalLink(project.liveUrl, 'Відкрити сайт')}</div></div></article>`;
+  }).join('') : '<div class="gallery-empty" role="status"><h2>Поки що порожньо.</h2><a class="text-link" href="/works">Усі роботи <span aria-hidden="true">↗</span></a></div>';
   handleMissingImages(root);
 }
 const filteredProjects = filterProjects(projects, categories, selectedCategory);
@@ -125,7 +84,7 @@ if (worksPage && selectedCategoryData) {
 $('#work-filters').innerHTML = [{ id: 'all', title: 'Усі роботи' }, ...categories].map(category => `<a class="work-filter" href="${esc(categoryUrl(category.id))}"${category.id === selectedCategory ? ' aria-current="true"' : ''}>${esc(category.title)}</a>`).join('');
 $('#directory-list').innerHTML = categories.map((category, index) => {
   const count = filterProjects(projects, categories, category.id).length;
-  return `<li><a class="directory-option" href="${esc(categoryUrl(category.id))}" aria-label="${esc(category.title)} — ${count ? `проєктів: ${count}` : 'незабаром'}"><span class="directory-number" aria-hidden="true">0${index + 1}</span><span><span class="directory-label">${esc(category.title)}</span><span class="directory-description">${esc(category.description)}</span></span><span class="directory-count">${count ? String(count).padStart(2, '0') : 'НЕЗАБАРОМ'}</span><span class="directory-arrow" aria-hidden="true">↗</span></a></li>`;
+  return `<li><a class="directory-option" href="${esc(categoryUrl(category.id))}" aria-label="${esc(category.title)} — ${count ? `проєктів: ${count}` : 'незабаром'}"><span class="directory-label">${esc(category.title)}</span><span class="directory-count">${String(count).padStart(2, '0')}</span><span class="directory-arrow" aria-hidden="true">↗</span></a></li>`;
 }).join('');
 initWorkDirectory($('#work-directory'));
 
@@ -135,7 +94,7 @@ contactHtml += externalLink(portfolio.contacts.telegram, portfolio.contacts.tele
 contactHtml += (portfolio.contacts.links || []).map(link => externalLink(link.url, link.label || link.name || 'Посилання')).join('');
 $('#contact-methods').innerHTML = contactHtml || '<p class="contact-placeholder">Контакти з’являться незабаром.<span>Прямі посилання ще не додані.</span></p>';
 const channel = portfolio.channel;
-if (safeUrl(channel.url)) $('#channel-link').innerHTML = externalLink(channel.url, channel.name || 'Мій канал');
+if (safeUrl(channel.url)) $('#channel-link').innerHTML = externalLink(channel.url, 'Мій канал');
 let toastTimer;
 function notify(message) { $('#toast').textContent = message; $('#toast').classList.add('visible'); clearTimeout(toastTimer); toastTimer = setTimeout(() => $('#toast').classList.remove('visible'), 3200); }
 $('#copy-email')?.addEventListener('click', async () => {
@@ -180,7 +139,7 @@ function openProject(event) {
     return;
   }
   trigger = button;
-  $('#dialog-content').innerHTML = `<span class="dialog-tag">${esc(project.placeholder ? 'Матеріали проєкту готуються' : project.category)}</span><h2 id="dialog-title">${esc(project.title)}</h2>${preview(project, index, 'dialog-preview')}<p>${esc(project.description)}</p>${project.role ? `<p><strong>Мій внесок:</strong> ${esc(project.role)}</p>` : ''}${project.details ? `<p>${esc(project.details)}</p>` : ''}<div class="dialog-links">${externalLink(project.liveUrl, 'Переглянути сайт', 'button button-light')}${externalLink(project.sourceUrl, 'Вихідний код')}</div><div class="dialog-gallery">${(project.screenshots || []).map((shot, i) => { const src = safeImage(typeof shot === 'string' ? shot : shot?.src); const normalized = src?.match(/^(?:\.\/)?assets\//) ? '/' + src.replace(/^\.\//, '') : src; return src ? `<img src="${esc(normalized)}" alt="${esc(shot?.alt || `${project.title} — екран ${i + 1}`)}" loading="lazy">` : ''; }).join('')}</div>`;
+  $('#dialog-content').innerHTML = `<span class="dialog-tag">${esc(project.placeholder ? 'Матеріали проєкту готуються' : project.category)}</span><h2 id="dialog-title">${esc(project.title)}</h2>${preview(project, index, 'dialog-preview')}<p>${esc(project.description)}</p>${project.role ? `<p><strong>Мій внесок:</strong> ${esc(project.role)}</p>` : ''}<div class="dialog-links">${externalLink(project.liveUrl, 'Переглянути сайт', 'button button-light')}${externalLink(project.sourceUrl, 'Вихідний код')}</div><div class="dialog-gallery">${(project.screenshots || []).map((shot, i) => { const src = safeImage(typeof shot === 'string' ? shot : shot?.src); const normalized = src?.match(/^(?:\.\/)?assets\//) ? '/' + src.replace(/^\.\//, '') : src; return src ? `<img src="${esc(normalized)}" alt="${esc(shot?.alt || `${project.title} — екран ${i + 1}`)}" loading="lazy">` : ''; }).join('')}</div>`;
   handleMissingImages($('#dialog-content'));
   document.body.style.overflow = 'hidden';
   dialog.showModal();

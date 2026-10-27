@@ -6,13 +6,13 @@ import { fileURLToPath } from 'node:url';
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const output = join(root, 'dist');
 const sourceFiles = [
-  'index.html', 'works/index.html', 'styles.css', 'app.js', 'content.js', 'wordmark.js',
+  'index.html', 'works/index.html', 'styles.css', 'app.js', 'content.js',
   'wave.js', 'motion.js', 'letters.js', 'utils.js', 'work-directory.js', 'town.css',
 ];
 const assets = [
-  'assets/portrait.webp', 'assets/lampera.webp', 'assets/barberlab.webp',
+  'assets/portrait-hero.webp', 'assets/lampera.webp', 'assets/barberlab.webp',
   'assets/mono-barber.webp', 'assets/luxe.webp', 'assets/velune.webp', 'assets/krykhta.webp',
-  'assets/favicon.svg', 'assets/business-quarter.svg',
+  'assets/favicon.svg',
 ];
 
 const digest = createHash('sha256');

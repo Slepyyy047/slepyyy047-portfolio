@@ -22,10 +22,10 @@ test('production output contains only allowlisted runtime files and used image a
   const files = (await filesUnder(dist)).map(path => relative(dist, path).replaceAll('\\', '/')).sort();
   const expected = [
     'app.js',
-    'assets/barberlab.webp', 'assets/favicon.svg', 'assets/lampera.webp', 'assets/portrait.webp',
+    'assets/barberlab.webp', 'assets/favicon.svg', 'assets/lampera.webp', 'assets/portrait-hero.webp',
     'assets/mono-barber.webp', 'assets/luxe.webp', 'assets/velune.webp', 'assets/krykhta.webp',
     'content.js', 'index.html', 'letters.js', 'motion.js', 'styles.css',
-    'utils.js', 'wave.js', 'wordmark.js', 'works/index.html', 'work-directory.js', 'town.css', 'assets/business-quarter.svg',
+    'utils.js', 'wave.js', 'works/index.html', 'work-directory.js', 'town.css',
   ].sort();
   assert.deepEqual(files, expected);
 });
@@ -34,18 +34,18 @@ test('HTML routes use deterministic cache versions for entry files and image URL
   for (const file of ['index.html', 'works/index.html']) {
     const html = await readFile(join(dist, file), 'utf8');
     const versions = [...html.matchAll(/[?&]v=([a-f0-9]{12})/g)].map(match => match[1]);
-    assert.ok(versions.length >= 7, `${file} should version css, app and image references`);
+    assert.ok(versions.length >= 6, `${file} should version css, app and image references`);
     assert.equal(new Set(versions).size, 1, `${file} should use one build version`);
     assert.match(html, /href="\/styles\.css\?v=/);
     assert.match(html, /href="\/town\.css\?v=/);
     assert.match(html, /src="\/app\.js\?v=/);
-    assert.match(html, /src="\/assets\/lampera\.webp\?v=[a-f0-9]{12}"/);
-    assert.match(html, /src="\/assets\/barberlab\.webp\?v=[a-f0-9]{12}"/);
+    assert.match(html, /src="\/assets\/portrait-hero\.webp\?v=[a-f0-9]{12}"/);
+    assert.match(html, /src="\/assets\/mono-barber\.webp\?v=[a-f0-9]{12}"/);
   }
 });
 
 test('module imports resolve to versioned files in the production output', async () => {
-  const names = ['app.js', 'content.js', 'wordmark.js', 'wave.js', 'motion.js', 'letters.js', 'utils.js', 'work-directory.js'];
+  const names = ['app.js', 'content.js', 'wave.js', 'motion.js', 'letters.js', 'utils.js', 'work-directory.js'];
   const jsFiles = await Promise.all(names.map(async name => [name, await readFile(join(dist, name), 'utf8')]));
   const versionSet = new Set();
   for (const [name, source] of jsFiles) {
