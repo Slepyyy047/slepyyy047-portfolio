@@ -101,7 +101,7 @@ img { display: block; max-width: 100%; }
 .preview-group { position: relative; display: flex; flex: none; align-items: stretch; gap: 24px; padding-right: 24px; }
 .hero-preview { position: relative; display: block; flex: 0 0 clamp(260px, 34vw, 480px); min-width: 0; padding: 0; overflow: hidden; border: 1px solid #aec8d22b; border-radius: 16px; background: var(--surface); text-align: left; box-shadow: 0 24px 60px #07111652; transition: border-color .3s, box-shadow .3s; }
 .hero-preview:hover, .hero-preview:focus-visible { z-index: 1; border-color: #91b2c28a; box-shadow: 0 24px 65px #07111670; }
-.hero-preview img { width: 100%; aspect-ratio: 1.94; object-fit: cover; object-position: top; opacity: .88; transition: transform .8s var(--ease), opacity .4s; }
+.hero-preview img { width: 100%; height: auto; aspect-ratio: 1.94; object-fit: cover; object-position: top; opacity: .88; transition: transform .8s var(--ease), opacity .4s; }
 .hero-preview:hover img { opacity: 1; transform: scale(1.035); }
 .hero-preview-rail:hover .preview-track, .hero-preview-rail:focus-within .preview-track, .hero-preview-rail.is-paused .preview-track, .hero-preview-rail.is-offscreen .preview-track, .hero-preview-rail.is-background .preview-track { animation-play-state: paused; }
 .hero-preview-rail.is-browsing .preview-window { overflow-x: auto; overscroll-behavior-inline: contain; scrollbar-width: thin; }
