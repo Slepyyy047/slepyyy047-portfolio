@@ -52,7 +52,7 @@ em { color: var(--accent); font-style: normal; }
 .wave-letter { display: inline-block; transform-origin: 50% 80%; }
 .letter-cell, .letter-face { display: inline-block; }
 .letter-face { transform: translate3d(0, var(--letter-y, 0px), 0) rotate(var(--letter-turn, 0deg)); transform-origin: 50% 80%; backface-visibility: hidden; transition: transform .34s var(--ease); }
-.hero-bottom { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-top: 4px; }
+.hero-bottom { display: flex; align-items: center; justify-content: center; gap: 24px; padding-top: 4px; }
 .hero-caption { color: var(--muted); font-size: 13px; letter-spacing: .025em; }
 .works-cta-wrap { position: relative; display: grid; min-width: 176px; min-height: 54px; place-items: center; isolation: isolate; }
 .works-cta { position: relative; z-index: 1; display: inline-flex; min-width: 176px; min-height: 52px; align-items: center; justify-content: center; gap: 24px; padding: 0 20px; border: 1px solid #ff363d88; border-radius: 3px; background: #190d0e; color: var(--text); font-size: 12px; font-weight: 650; box-shadow: 0 0 22px #ff363d16, inset 0 0 20px #ff363d0b; transition: border-color .25s, background .25s, box-shadow .25s, transform .25s var(--ease); }
@@ -189,9 +189,9 @@ dialog::backdrop { background: #000d; backdrop-filter: blur(9px); }
   .brand { font-size: 16px; }
   .header nav { gap: clamp(12px, 4vw, 24px); }
   .header nav a, .header nav button { font-size: 11px; }
-  .hero-frame { min-height: 680px; min-height: min(760px, calc(100svh - 66px)); padding-block: 28px 18px; }
+  .hero-frame { min-height: 0; padding-block: 28px 28px; }
   .hero-eyebrow { font-size: 8px; letter-spacing: .16em; }
-  .hero-composition { min-height: 430px; }
+  .hero-composition { flex: none; min-height: 0; height: min(108vw, 500px); }
   .hero-portrait { width: min(92vw, 500px); }
   .hero-title { bottom: 54px; font-size: clamp(50px, 16.6vw, 120px); }
   .hero-bottom { align-items: flex-end; }
@@ -220,8 +220,8 @@ dialog::backdrop { background: #000d; backdrop-filter: blur(9px); }
   .wrap { padding-inline: 16px; }
   .header nav { gap: 10px; }
   .header nav a, .header nav button { font-size: 10px; }
-  .hero-frame { min-height: min(690px, calc(100svh - 66px)); }
-  .hero-composition { min-height: 400px; }
+  .hero-frame { min-height: 0; }
+  .hero-composition { min-height: 0; }
   .hero-title { font-size: clamp(48px, 16.4vw, 62px); letter-spacing: -.11em; }
   .hero-bottom { gap: 10px; }
   .hero-caption { max-width: 110px; font-size: 10px; }
