@@ -43,3 +43,5 @@ portrait-hero.webp — варіант того самого danylo.png шири�
 ## Нова робота: HALFSHAFT, 2026-11-16
 
 - `halfshaft.webp`: знімок першого екрана https://halfshaft-site.vercel.app (скріншот браузера 800 px, збільшений до 1440 × 745, WebP, якість 82). Сайт створено для портфоліо; фотографії всередині з Wikimedia Commons (CC BY 2.0 / CC BY-SA 4.0), вказані в підвалі сайту.
+
+- `baymetric.webp` — скриншот головної сторінки, 1440 × 810. [BAYMETRIC](https://baymetric.vercel.app/)

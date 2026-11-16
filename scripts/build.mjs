@@ -11,7 +11,7 @@ const sourceFiles = [
 ];
 const assets = [
   'assets/portrait-hero.webp', 'assets/lampera.webp', 'assets/barberlab.webp',
-  'assets/mono-barber.webp', 'assets/luxe.webp', 'assets/velune.webp', 'assets/krykhta.webp', 'assets/halfshaft.webp',
+  'assets/mono-barber.webp', 'assets/luxe.webp', 'assets/velune.webp', 'assets/krykhta.webp', 'assets/halfshaft.webp', 'assets/baymetric.webp',
   'assets/favicon.svg',
 ];
 

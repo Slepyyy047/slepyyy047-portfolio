@@ -27,6 +27,7 @@ test('provided projects use their live links and supplied screenshot assets', as
     { id: 'lampera', title: 'LAMPERA', liveUrl: 'https://lampera.base44.app', cover: 'assets/lampera.webp' },
     { id: 'barberlab', title: 'BARBERLAB', liveUrl: 'https://barberlab-busk.vercel.app', cover: 'assets/barberlab.webp' },
     { id: 'halfshaft', title: 'HALFSHAFT', liveUrl: 'https://halfshaft-site.vercel.app', cover: 'assets/halfshaft.webp' },
+    { id: 'baymetric', title: 'BAYMETRIC', liveUrl: 'https://baymetric.vercel.app/', cover: 'assets/baymetric.webp' },
   ]);
   assert.ok(portfolio.projects.every(project => !project.placeholder && !project.role && !project.sourceUrl));
   for (const project of portfolio.projects) {
