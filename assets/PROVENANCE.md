@@ -39,3 +39,7 @@ portrait-hero.webp — варіант того самого danylo.png шири�
 - `luxe.webp`: `codex-clipboard-f4357b8e-b99f-48d2-b133-0b87aac7b053.png`, 1819 × 939 → 1440 × 743. Сайт: https://luxe-hair-studio-ruddy.vercel.app/uk
 - `velune.webp`: `codex-clipboard-f31dcf34-833d-4a5c-b3c0-1010403f297e.png`, 1825 × 919 → 1440 × 725. Сайт: https://velune-theta.vercel.app/
 - `krykhta.webp`: `codex-clipboard-c85a9bbc-bc55-48a0-8f15-06b851760106.png`, 1432 × 937, розмір збережено. Сайт: https://krykhta-patisserie.vercel.app/
+
+## Нова робота: HALFSHAFT, 2026-11-16
+
+- `halfshaft.webp`: знімок першого екрана https://halfshaft-site.vercel.app (скріншот браузера 800 px, збільшений до 1440 × 745, WebP, якість 82). Сайт створено для портфоліо; фотографії всередині з Wikimedia Commons (CC BY 2.0 / CC BY-SA 4.0), вказані в підвалі сайту.

@@ -11,7 +11,7 @@ test('published businesses appear only in the right category', () => {
   assert.deepEqual(filterProjects(projects, categories, 'coffee').map(p => p.id), ['velune']);
   assert.deepEqual(filterProjects(projects, categories, 'beauty').map(p => p.id), ['luxe']);
   assert.deepEqual(filterProjects(projects, categories, 'pastry').map(p => p.id), ['krykhta']);
-  assert.deepEqual(filterProjects(projects, categories, 'other'), []);
+  assert.deepEqual(filterProjects(projects, categories, 'other').map(p => p.id), ['halfshaft']);
   assert.equal(new Set(categories.map(c => c.id)).size, categories.length);
   for (const project of projects) assert.notEqual(normalizeCategory(project.categoryId, categories), 'all');
 });

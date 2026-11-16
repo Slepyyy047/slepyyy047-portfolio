@@ -13,11 +13,11 @@ npm run build
 
 Локальна адреса: http://localhost:4173. Сторінка робіт: /works. Vercel публікує тільки dist/. Збірка додає версію до модулів, стилів та HTML-посилань на зображення.
 
-index.html і works/index.html мають бути однаковими. Дані, шість проєктів і категорії зібрані в content.js. Нові обкладинки також потрібно включати в assets у scripts/build.mjs.
+index.html і works/index.html мають бути однаковими. Дані, сім проєктів і категорії зібрані в content.js. Нові обкладинки також потрібно включати в assets у scripts/build.mjs.
 
 ## Роботи та контакти
 
-MONO BARBER, LUXE Hair Studio, VELUNE, КРИХТА, LAMPERA і BARBERLAB доступні через окреме меню за напрямами. Прямі адреси: /works?category=barber, coffee, beauty, pastry, retail, other. Невідомі категорії відкривають усі роботи, а проєкти без відомої категорії потрапляють у «Інші бізнеси».
+MONO BARBER, LUXE Hair Studio, VELUNE, КРИХТА, LAMPERA, BARBERLAB і HALFSHAFT доступні через окреме меню за напрямами. Прямі адреси: /works?category=barber, coffee, beauty, pastry, retail, other. Невідомі категорії відкривають усі роботи, а проєкти без відомої категорії потрапляють у «Інші бізнеси».
 
 - Telegram: https://t.me/foxyredCEO
 - Канал: https://t.me/+GW8PM4mr1_4zYThh
