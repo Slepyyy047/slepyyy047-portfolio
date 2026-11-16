@@ -27,6 +27,7 @@ test('provided projects use their live links and supplied screenshot assets', as
     { id: 'barberlab', title: 'BARBERLAB', liveUrl: 'https://barberlab-busk.vercel.app', cover: 'assets/barberlab.webp' },
     { id: 'halfshaft', title: 'HALFSHAFT', liveUrl: 'https://halfshaft-site.vercel.app', cover: 'assets/halfshaft.webp' },
     { id: 'baymetric', title: 'BAYMETRIC', liveUrl: 'https://baymetric.vercel.app/', cover: 'assets/baymetric.webp' },
+    { id: 'karve-motors', title: 'KARVÉ MOTORS', liveUrl: 'https://karve-motors.vercel.app/', cover: 'assets/karve-motors.webp' },
   ]);
   assert.ok(portfolio.projects.every(project => !project.placeholder && !project.role && !project.sourceUrl));
   for (const project of portfolio.projects) {

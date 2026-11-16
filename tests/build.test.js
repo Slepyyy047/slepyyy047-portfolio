@@ -23,7 +23,7 @@ test('production output contains only allowlisted runtime files and used image a
   const expected = [
     'app.js',
     'assets/barberlab.webp', 'assets/favicon.svg', 'assets/portrait-hero.webp',
-    'assets/mono-barber.webp', 'assets/luxe.webp', 'assets/velune.webp', 'assets/krykhta.webp', 'assets/halfshaft.webp', 'assets/baymetric.webp',
+    'assets/mono-barber.webp', 'assets/luxe.webp', 'assets/velune.webp', 'assets/krykhta.webp', 'assets/halfshaft.webp', 'assets/baymetric.webp', 'assets/karve-motors.webp',
     'content.js', 'index.html', 'letters.js', 'motion.js', 'styles.css',
     'utils.js', 'works/index.html', 'work-directory.js', 'town.css',
   ].sort();

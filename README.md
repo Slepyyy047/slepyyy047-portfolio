@@ -17,7 +17,7 @@ index.html і works/index.html мають бути однаковими. Дан�
 
 ## Роботи та контакти
 
-MONO BARBER, LUXE Hair Studio, VELUNE, КРИХТА, BARBERLAB, HALFSHAFT і BAYMETRIC доступні через меню за напрямами. Прямі адреси: /works?category=food (кав’ярні та кондитерські), beauty (барбершопи та салони краси), auto (авто бізнеси), other. Невідомі категорії відкривають усі роботи, а проєкти без відомої категорії потрапляють в «Інші бізнеси».
+MONO BARBER, LUXE Hair Studio, VELUNE, КРИХТА, BARBERLAB, HALFSHAFT, BAYMETRIC і KARVÉ MOTORS доступні через меню за напрямами. Прямі адреси: /works?category=food (кав’ярні та кондитерські), beauty (барбершопи та салони краси), auto (авто бізнеси), other. Невідомі категорії відкривають усі роботи, а проєкти без відомої категорії потрапляють в «Інші бізнеси».
 
 - Telegram: https://t.me/foxyredCEO
 
