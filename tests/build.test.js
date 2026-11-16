@@ -22,10 +22,10 @@ test('production output contains only allowlisted runtime files and used image a
   const files = (await filesUnder(dist)).map(path => relative(dist, path).replaceAll('\\', '/')).sort();
   const expected = [
     'app.js',
-    'assets/barberlab.webp', 'assets/favicon.svg', 'assets/lampera.webp', 'assets/portrait-hero.webp',
+    'assets/barberlab.webp', 'assets/favicon.svg', 'assets/portrait-hero.webp',
     'assets/mono-barber.webp', 'assets/luxe.webp', 'assets/velune.webp', 'assets/krykhta.webp', 'assets/halfshaft.webp', 'assets/baymetric.webp',
     'content.js', 'index.html', 'letters.js', 'motion.js', 'styles.css',
-    'utils.js', 'wave.js', 'works/index.html', 'work-directory.js', 'town.css',
+    'utils.js', 'works/index.html', 'work-directory.js', 'town.css',
   ].sort();
   assert.deepEqual(files, expected);
 });
@@ -45,7 +45,7 @@ test('HTML routes use deterministic cache versions for entry files and image URL
 });
 
 test('module imports resolve to versioned files in the production output', async () => {
-  const names = ['app.js', 'content.js', 'wave.js', 'motion.js', 'letters.js', 'utils.js', 'work-directory.js'];
+  const names = ['app.js', 'content.js', 'motion.js', 'letters.js', 'utils.js', 'work-directory.js'];
   const jsFiles = await Promise.all(names.map(async name => [name, await readFile(join(dist, name), 'utf8')]));
   const versionSet = new Set();
   for (const [name, source] of jsFiles) {

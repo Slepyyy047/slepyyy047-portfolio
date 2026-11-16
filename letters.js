@@ -3,7 +3,7 @@ const MAX_LIFT = 8;
 const MAX_TURN = 4;
 const RESET_EPSILON = 0.01;
 
-const SELECTOR = '#intro-title, #about-title, #selected-title, #contact-title, .project-meta h3, #works-title';
+const SELECTOR = '#contact-title, .project-meta h3, #works-title';
 
 /** Compute a bounded local lift and turn for a letter near the pointer. */
 export function computeLetterMotion(x, y, pointerX, pointerY, radius = DEFAULT_RADIUS) {

@@ -3,14 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#080808">
+  <meta name="theme-color" content="#0d0b0b">
   <title>Slepyyy047 — портфоліо</title>
-  <meta name="description" content="Портфоліо Slepyyy047. Сайти для бізнесу: MONO BARBER, LUXE, VELUNE, КРИХТА, LAMPERA та BARBERLAB.">
+  <meta name="description" content="Сайти та Telegram-боти для малого бізнесу: кав’ярні, кондитерські, барбершопи, салони краси, авто бізнеси. Роботи та контакти Slepyyy047.">
   <meta property="og:title" content="Slepyyy047 — портфоліо">
-  <meta property="og:description" content="Дизайн і розробка сайтів. Роботи та контакти.">
+  <meta property="og:description" content="Сайти та Telegram-боти для бізнесу. Роботи та контакти.">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="uk_UA">
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap">
   <link rel="stylesheet" href="/styles.css">
   <link rel="stylesheet" href="/town.css">
   <script type="module" src="/app.js"></script>
@@ -21,20 +24,20 @@
     <a class="brand" href="/" aria-label="Slepyyy047 — головна">slepyyy047</a>
     <nav aria-label="Основна навігація">
       <button class="gallery-only" type="button" data-nav-works data-open-directory aria-haspopup="dialog" aria-controls="work-directory">Роботи</button>
-      <a href="/#about">Про мене</a><a href="/#contact">Написати <span aria-hidden="true">↗</span></a>
+      <a href="/#services">Послуги</a><a href="/#about">Про мене</a><a href="/#contact">Написати <span aria-hidden="true">↗</span></a>
     </nav>
   </header>
   <main id="main" tabindex="-1">
     <div id="home-page">
       <section class="hero intro-landscape" aria-labelledby="intro-title">
         <div class="hero-frame wrap">
-          <p class="hero-eyebrow">Дизайн / Розробка</p>
           <div class="hero-composition">
             <div class="hero-halo" aria-hidden="true"></div>
             <figure class="hero-portrait"><img id="portrait-image" src="/assets/portrait-hero.webp" alt="Ілюстрований портрет Slepyyy047" width="1100" height="1100" fetchpriority="high"></figure>
             <h1 class="hero-title" id="intro-title">PORTFOLIO</h1>
           </div>
           <div class="hero-bottom">
+            <p class="hero-caption">Сайти та Telegram-боти для бізнесу</p>
             <div class="works-cta-wrap">
               <span class="button-particles" aria-hidden="true"><i style="--i:0;--x:88.0px;--y:0.0px;--tx:135.0px;--ty:0.0px"></i><i style="--i:1;--x:76.2px;--y:13.5px;--tx:116.9px;--ty:38.0px"></i><i style="--i:2;--x:44.0px;--y:23.4px;--tx:67.5px;--ty:65.8px"></i><i style="--i:3;--x:0.0px;--y:27.0px;--tx:0.0px;--ty:76.0px"></i><i style="--i:4;--x:-44.0px;--y:23.4px;--tx:-67.5px;--ty:65.8px"></i><i style="--i:5;--x:-76.2px;--y:13.5px;--tx:-116.9px;--ty:38.0px"></i><i style="--i:6;--x:-88.0px;--y:0.0px;--tx:-135.0px;--ty:0.0px"></i><i style="--i:7;--x:-76.2px;--y:-13.5px;--tx:-116.9px;--ty:-38.0px"></i><i style="--i:8;--x:-44.0px;--y:-23.4px;--tx:-67.5px;--ty:-65.8px"></i><i style="--i:9;--x:-0.0px;--y:-27.0px;--tx:-0.0px;--ty:-76.0px"></i><i style="--i:10;--x:44.0px;--y:-23.4px;--tx:67.5px;--ty:-65.8px"></i><i style="--i:11;--x:76.2px;--y:-13.5px;--tx:116.9px;--ty:-38.0px"></i></span>
               <button class="works-cta" type="button" data-open-directory aria-haspopup="dialog" aria-controls="work-directory"><span>Мої роботи</span><span aria-hidden="true">↗</span></button>
@@ -48,7 +51,15 @@
           <figure class="hero-preview"><img src="/assets/luxe.webp" alt="LUXE — вигляд сайту" width="1440" height="743"><figcaption class="preview-caption"><span>LUXE</span><span>Салон краси</span></figcaption></figure>
         </div></div></div>
       </section>
-      <section class="about-strip wrap reveal" id="about" aria-labelledby="about-title"><h2 id="about-title">Данило.</h2><p id="about-description">Створюю сайти для бізнесу — від дизайну до запуску.</p></section>
+      <section class="about-strip wrap reveal" id="about" aria-labelledby="about-title"><h2 id="about-title">Про мене</h2><p id="about-description">Роблю сайти й Telegram-ботів для малого бізнесу.</p></section>
+      <section class="services wrap" id="services" aria-labelledby="services-title">
+        <h2 class="section-title" id="services-title">Що я роблю</h2>
+        <div class="service-list" id="service-list"></div>
+      </section>
+      <section class="steps wrap" aria-labelledby="steps-title">
+        <h2 class="section-title" id="steps-title">Як ми працюємо</h2>
+        <ol class="step-list" id="step-list"></ol>
+      </section>
     </div>
     <section id="works-page" class="works-page wrap" aria-labelledby="works-title" hidden>
       <a class="back-link" href="/">← На головну</a>
@@ -57,7 +68,7 @@
       <nav class="work-filters" id="work-filters" aria-label="Категорії робіт"></nav>
       <div class="gallery-heading"><span id="gallery-category">Усі напрями</span><span id="gallery-note"></span></div><div id="all-projects" class="project-grid"></div>
     </section>
-    <section class="contact" id="contact" aria-labelledby="contact-title"><div class="contact-inner wrap"><h2 id="contact-title">Є ідея?</h2><div id="contact-methods" class="contact-methods"></div><div id="channel-link"></div></div></section>
+    <section class="contact" id="contact" aria-labelledby="contact-title"><div class="contact-inner wrap"><h2 id="contact-title">Є ідея?</h2><p class="contact-lead">Напишіть мені в Telegram і розкажіть про свій бізнес. Підкажу, з чого почати.</p><div id="contact-methods" class="contact-methods"></div></div></section>
   </main>
   <footer class="footer wrap"><a class="identity-name" href="/">Slepyyy047</a><a href="#main">Нагору <span aria-hidden="true">↑</span></a></footer>
   <dialog id="work-directory" class="work-directory" aria-labelledby="directory-title" aria-describedby="directory-description">
@@ -69,6 +80,6 @@
   </dialog>
   <dialog id="project-dialog" aria-labelledby="dialog-title"><button class="dialog-close" aria-label="Закрити проєкт">✕</button><div id="dialog-content"></div></dialog>
   <p class="toast" id="toast" role="status" aria-live="polite"></p>
-  <noscript><p class="noscript">Напиши в <a href="https://t.me/foxyredCEO">Telegram</a>. Роботи: <a href="https://mono-barber-xi.vercel.app/#home">MONO BARBER</a>, <a href="https://luxe-hair-studio-ruddy.vercel.app/uk">LUXE</a>, <a href="https://velune-theta.vercel.app/">VELUNE</a>, <a href="https://krykhta-patisserie.vercel.app/">КРИХТА</a>, <a href="https://lampera.base44.app">LAMPERA</a>, <a href="https://barberlab-busk.vercel.app">BARBERLAB</a>, <a href="https://halfshaft-site.vercel.app">HALFSHAFT</a>, <a href="https://baymetric.vercel.app/">BAYMETRIC</a>.</p></noscript>
+  <noscript><p class="noscript">Напиши в <a href="https://t.me/foxyredCEO">Telegram</a>. Роботи: <a href="https://mono-barber-xi.vercel.app/#home">MONO BARBER</a>, <a href="https://luxe-hair-studio-ruddy.vercel.app/uk">LUXE</a>, <a href="https://velune-theta.vercel.app/">VELUNE</a>, <a href="https://krykhta-patisserie.vercel.app/">КРИХТА</a>, <a href="https://barberlab-busk.vercel.app">BARBERLAB</a>, <a href="https://halfshaft-site.vercel.app">HALFSHAFT</a>, <a href="https://baymetric.vercel.app/">BAYMETRIC</a>.</p></noscript>
 </body>
 </html>

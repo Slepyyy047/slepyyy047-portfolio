@@ -24,7 +24,6 @@ test('provided projects use their live links and supplied screenshot assets', as
     { id: 'luxe', title: 'LUXE Hair Studio', liveUrl: 'https://luxe-hair-studio-ruddy.vercel.app/uk', cover: 'assets/luxe.webp' },
     { id: 'velune', title: 'VELUNE', liveUrl: 'https://velune-theta.vercel.app/', cover: 'assets/velune.webp' },
     { id: 'krykhta', title: 'КРИХТА', liveUrl: 'https://krykhta-patisserie.vercel.app/', cover: 'assets/krykhta.webp' },
-    { id: 'lampera', title: 'LAMPERA', liveUrl: 'https://lampera.base44.app', cover: 'assets/lampera.webp' },
     { id: 'barberlab', title: 'BARBERLAB', liveUrl: 'https://barberlab-busk.vercel.app', cover: 'assets/barberlab.webp' },
     { id: 'halfshaft', title: 'HALFSHAFT', liveUrl: 'https://halfshaft-site.vercel.app', cover: 'assets/halfshaft.webp' },
     { id: 'baymetric', title: 'BAYMETRIC', liveUrl: 'https://baymetric.vercel.app/', cover: 'assets/baymetric.webp' },
@@ -38,12 +37,10 @@ test('provided projects use their live links and supplied screenshot assets', as
     assert.equal(asset.toString('ascii', 8, 12), 'WEBP');
   }
 });
-test('provided contact and channel links are valid and project identities stay unique', () => {
+test('contact link is valid, the channel is gone and project identities stay unique', () => {
   assert.equal(portfolio.contacts.email, null);
   assert.equal(portfolio.contacts.telegram, 'https://t.me/foxyredCEO');
   assert.ok(safeUrl(portfolio.contacts.telegram));
-  assert.equal(portfolio.channel.name, 'Мій Telegram-канал');
-  assert.equal(portfolio.channel.url, 'https://t.me/+GW8PM4mr1_4zYThh');
-  assert.ok(safeUrl(portfolio.channel.url));
+  assert.equal(portfolio.channel, undefined);
   assert.equal(new Set(portfolio.projects.map(project => project.id)).size, portfolio.projects.length);
 });

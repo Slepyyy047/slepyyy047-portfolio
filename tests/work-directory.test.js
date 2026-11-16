@@ -6,12 +6,12 @@ import { normalizeCategory, filterProjects, categoryUrl, initWorkDirectory } fro
 const { projects, workCategories: categories } = portfolio;
 
 test('published businesses appear only in the right category', () => {
-  assert.deepEqual(filterProjects(projects, categories, 'retail').map(p => p.id), ['lampera']);
-  assert.deepEqual(filterProjects(projects, categories, 'barber').map(p => p.id), ['mono-barber', 'barberlab']);
-  assert.deepEqual(filterProjects(projects, categories, 'coffee').map(p => p.id), ['velune']);
-  assert.deepEqual(filterProjects(projects, categories, 'beauty').map(p => p.id), ['luxe']);
-  assert.deepEqual(filterProjects(projects, categories, 'pastry').map(p => p.id), ['krykhta']);
-  assert.deepEqual(filterProjects(projects, categories, 'other').map(p => p.id), ['halfshaft', 'baymetric']);
+  assert.deepEqual(categories.map(c => c.id), ['food', 'beauty', 'auto', 'other']);
+  assert.deepEqual(filterProjects(projects, categories, 'beauty').map(p => p.id), ['mono-barber', 'luxe', 'barberlab']);
+  assert.deepEqual(filterProjects(projects, categories, 'food').map(p => p.id), ['velune', 'krykhta']);
+  assert.deepEqual(filterProjects(projects, categories, 'auto').map(p => p.id), ['halfshaft', 'baymetric']);
+  assert.deepEqual(filterProjects(projects, categories, 'other'), []);
+  assert.deepEqual(filterProjects(projects, categories, 'other'), []);
   assert.equal(new Set(categories.map(c => c.id)).size, categories.length);
   for (const project of projects) assert.notEqual(normalizeCategory(project.categoryId, categories), 'all');
 });
@@ -30,7 +30,7 @@ test('missing or invalid category links show all works without mutating portfoli
 test('new businesses without an assigned known category remain discoverable under other businesses', () => {
   const future = [{ id: 'new' }, { id: 'another', categoryId: 'new-direction' }];
   assert.deepEqual(filterProjects(future, categories, 'other'), future);
-  assert.deepEqual(filterProjects(future, categories, 'coffee'), []);
+  assert.deepEqual(filterProjects(future, categories, 'food'), []);
 });
 
 test('category URLs preserve direct navigation and cannot inject extra query parameters', () => {
@@ -40,7 +40,7 @@ test('category URLs preserve direct navigation and cannot inject extra query par
     assert.equal(url.pathname, '/works');
     assert.equal(url.searchParams.get('category'), category.id);
   }
-  const crafted = new URL(categoryUrl('coffee&redirect=https://example.com'), 'https://portfolio.example');
+  const crafted = new URL(categoryUrl('food&redirect=https://example.com'), 'https://portfolio.example');
   assert.equal(crafted.searchParams.has('redirect'), false);
 });
 

@@ -1,5 +1,4 @@
 import { portfolio } from './content.js';
-import { initScrollWave } from './wave.js';
 import { initRevealMotion } from './motion.js';
 import { initLetterInteractions } from './letters.js';
 import { normalizeCategory, filterProjects, categoryUrl, initWorkDirectory } from './work-directory.js';
@@ -15,7 +14,10 @@ if (worksPage) $('[data-nav-works]').setAttribute('aria-current', 'page');
 document.title = `${worksPage ? 'Усі роботи' : 'Створення сайтів та портфоліо'} — ${portfolio.name}`;
 document.querySelector('meta[property="og:title"]').content = document.title;
 document.querySelectorAll('.identity-name').forEach(element => { element.textContent = portfolio.name; });
-$('#intro-title').innerHTML = portfolio.headline.split('\n').map((line, index) => index ? `<em>${esc(line)}</em>` : esc(line)).join('<br>');
+// Each letter drifts on its own slow loop; offset delays keep neighbours out of sync.
+const headline = portfolio.headline.replace(/\s+/g, ' ').trim();
+$('#intro-title').setAttribute('aria-label', headline);
+$('#intro-title').innerHTML = `<span class="hero-letters" aria-hidden="true">${[...headline].map((char, index) => `<span class="hero-letter" style="--i:${index}"><span class="hero-letter-face">${char === ' ' ? '&nbsp;' : esc(char)}</span></span>`).join('')}</span>`;
 $('#about-description').textContent = portfolio.about;
 $('#portrait-image').alt = `Ілюстрований портрет ${portfolio.name}`;
 const portraitImage = $('#portrait-image');
@@ -30,9 +32,8 @@ function showPortraitFallback() {
 }
 portraitImage.addEventListener('error', showPortraitFallback, { once: true });
 if (portraitImage.complete && !portraitImage.naturalWidth) showPortraitFallback();
-if (!worksPage) {
-  initScrollWave($('#intro-title'));
-}
+$('#service-list').innerHTML = (portfolio.services || []).map(service => `<article class="service reveal"><h3>${esc(service.title)}</h3><p>${esc(service.text)}</p><ul>${service.points.map(point => `<li>${esc(point)}</li>`).join('')}</ul></article>`).join('');
+$('#step-list').innerHTML = (portfolio.steps || []).map(step => `<li class="step reveal"><h3>${esc(step.title)}</h3><p>${esc(step.text)}</p></li>`).join('');
 
 function externalLink(url, label, className = 'text-link') {
   const valid = safeUrl(url);
@@ -70,7 +71,7 @@ function renderProjects(root, entries) {
   root.innerHTML = entries.length ? entries.map(project => {
     const index = projects.indexOf(project);
     return `<article class="project-card reveal is-sealed" data-card="${index}"><button class="project-open" data-project="${index}" aria-label="Показати прев’ю: ${esc(project.title)}">${preview(project, index, '', true)}<div class="project-meta"><h3>${esc(project.title)}</h3><span class="project-arrow" aria-hidden="true">↗</span></div></button><div class="project-footer"><span>${esc(project.category || '')}</span><div class="project-actions"><button class="text-link project-details" data-project="${index}" hidden>Деталі <span aria-hidden="true">↗</span></button>${externalLink(project.liveUrl, 'Відкрити сайт')}</div></div></article>`;
-  }).join('') : '<div class="gallery-empty" role="status"><h2>Поки що порожньо.</h2><a class="text-link" href="/works">Усі роботи <span aria-hidden="true">↗</span></a></div>';
+  }).join('') : `<div class="gallery-empty" role="status"><h2>Тут скоро з’являться роботи.</h2><p>Хочете бути першим у цьому напрямі? Напишіть мені.</p><a class="text-link" href="#contact">Обговорити проєкт <span aria-hidden="true">↗</span></a></div>`;
   handleMissingImages(root);
 }
 const filteredProjects = filterProjects(projects, categories, selectedCategory);
@@ -90,11 +91,9 @@ initWorkDirectory($('#work-directory'));
 
 const email = validEmail(portfolio.contacts.email);
 let contactHtml = email ? `<a class="text-link" href="mailto:${encodeURIComponent(email)}">${esc(email)} <span aria-hidden="true">↗</span></a><button class="copy-button" id="copy-email">Скопіювати email <span aria-hidden="true">⧉</span></button>` : '';
-contactHtml += externalLink(portfolio.contacts.telegram, portfolio.contacts.telegramLabel || 'Telegram');
+contactHtml += externalLink(portfolio.contacts.telegram, portfolio.contacts.telegramLabel || 'Telegram', 'button button-primary');
 contactHtml += (portfolio.contacts.links || []).map(link => externalLink(link.url, link.label || link.name || 'Посилання')).join('');
 $('#contact-methods').innerHTML = contactHtml || '<p class="contact-placeholder">Контакти з’являться незабаром.<span>Прямі посилання ще не додані.</span></p>';
-const channel = portfolio.channel;
-if (safeUrl(channel.url)) $('#channel-link').innerHTML = externalLink(channel.url, 'Мій канал');
 let toastTimer;
 function notify(message) { $('#toast').textContent = message; $('#toast').classList.add('visible'); clearTimeout(toastTimer); toastTimer = setTimeout(() => $('#toast').classList.remove('visible'), 3200); }
 $('#copy-email')?.addEventListener('click', async () => {

@@ -24,7 +24,7 @@ async function directoryCheck(button) {
 }
 try {
   assert.equal((await page.goto(base)).status(), 200);
-  await page.locator('.wave-letter').first().waitFor();
+  await page.locator('.hero-letter').first().waitFor();
   assert.equal(await page.locator('#intro-title').getAttribute('aria-label'), 'PORTFOLIO');
   assert.equal(await page.locator('#home-page [data-open-directory]').count(), 1);
   assert.equal(await page.locator('.preview-toggle').count(), 0);
