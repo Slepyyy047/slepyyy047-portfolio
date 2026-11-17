@@ -24,6 +24,7 @@ test('provided projects use their live links and supplied screenshot assets', as
     { id: 'luxe', title: 'LUXE Hair Studio', liveUrl: 'https://luxe-hair-studio-ruddy.vercel.app/uk', cover: 'assets/luxe.webp' },
     { id: 'velune', title: 'VELUNE', liveUrl: 'https://velune-theta.vercel.app/', cover: 'assets/velune.webp' },
     { id: 'krykhta', title: 'КРИХТА', liveUrl: 'https://krykhta-patisserie.vercel.app/', cover: 'assets/krykhta.webp' },
+    { id: 'korra', title: 'KORRA', liveUrl: 'https://korra-coffee.vercel.app/', cover: 'assets/korra.webp' },
     { id: 'barberlab', title: 'BARBERLAB', liveUrl: 'https://barberlab-busk.vercel.app', cover: 'assets/barberlab.webp' },
     { id: 'halfshaft', title: 'HALFSHAFT', liveUrl: 'https://halfshaft-site.vercel.app', cover: 'assets/halfshaft.webp' },
     { id: 'baymetric', title: 'BAYMETRIC', liveUrl: 'https://baymetric.vercel.app/', cover: 'assets/baymetric.webp' },

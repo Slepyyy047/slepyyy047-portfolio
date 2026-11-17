@@ -12,6 +12,7 @@ const sourceFiles = [
 const assets = [
   'assets/portrait-hero.webp', 'assets/barberlab.webp',
   'assets/mono-barber.webp', 'assets/luxe.webp', 'assets/velune.webp', 'assets/krykhta.webp', 'assets/halfshaft.webp', 'assets/baymetric.webp', 'assets/karve-motors.webp',
+  'assets/korra.webp',
   'assets/favicon.svg',
 ];
 
